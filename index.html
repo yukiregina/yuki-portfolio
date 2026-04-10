@@ -261,9 +261,17 @@
     }
     .about-photo-wrap-inline:hover img { transform: scale(1.03); }
 
+    /* ── Testimonials grid ──────────────────────────────── */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      width: 100%;
+    }
     @media (max-width: 768px) {
       .contact-inline-inner { grid-template-columns: 1fr; gap: 48px; }
       .about-inline-grid    { grid-template-columns: 1fr; gap: 40px; }
+      .testimonials-grid    { grid-template-columns: 1fr; }
     }
   </style>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -316,7 +324,7 @@
         </h1>
 
         <p class="hero-sub hero-fade">
-          Born between two cultures. Trained to find the gap.
+          I find what no one named yet. Then I design from there.
         </p>
 
         <div class="hero-actions hero-fade">
@@ -422,7 +430,7 @@
               </svg>
               Under NDA
             </p>
-            <p class="project-synopsis">End-to-end research across 6 teams and 12 systems to fix a broken anti-fraud journey — without breaking the in-person magic. The two directions I identified became the leading brief for the next cycle.</p>
+            <p class="project-synopsis">End-to-end research across 6 teams and 12 systems. The problem everyone assumed it was — wasn't. Two insights I identified became the leading brief for the next cycle.</p>
             <div class="project-arrow" aria-hidden="true">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                 <path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
@@ -450,7 +458,8 @@
             That gap became my work: <span style="color:var(--indigo);">identifying what's missing before it reaches the screen.</span>
           </p>
           <div class="about-inline-body reveal">
-            <p>From Art Direction to Product Design, every pivot sharpened the same instinct: when design truly serves people, business growth follows.</p>
+            <p>I trained as a Graphic Designer in Tokyo, where restraint is a discipline. I built most of my career in São Paulo, where complexity is the starting point. Both shaped the same habit: slow down on the question, move fast on the answer.</p>
+            <p>From Art Direction to Product Design, every step pointed in the same direction. When design truly serves people, business growth follows.</p>
             <p><strong>Open to remote, global roles.</strong></p>
           </div>
         </div>
@@ -459,12 +468,20 @@
           <div class="about-photo-wrap-inline reveal delay-2">
             <img src="assets/images/yuki-photo.jpg" alt="Yuki Regina">
           </div>
-          <!-- Testimonials — 1 featured -->
-          <div class="testimonial-card reveal delay-3" style="width:100%">
-            <img src="assets/images/marina-photo.jpg" alt="Marina" style="width:40px;height:40px;border-radius:50%;object-fit:cover;flex-shrink:0;">
-            <p class="testi-text">"Yuki has an exceptional ability to transform complex strategies into tangible solutions, bridging business needs with impeccable design — from Product Discovery and ROI definition to delivering high-value digital products from scratch."</p>
-            <p class="testi-name">Marina Ferreira Mendez</p>
-            <p class="testi-role">Group Product Manager · B2B Platform</p>
+          <!-- Testimonials — 2 side by side -->
+          <div class="testimonials-grid">
+            <div class="testimonial-card reveal delay-3">
+              <img src="assets/images/marina-photo.jpg" alt="Marina Ferreira Mendez" style="width:40px;height:40px;border-radius:50%;object-fit:cover;flex-shrink:0;">
+              <p class="testi-text">"Yuki has an exceptional ability to transform complex strategies into tangible solutions, bridging business needs with impeccable design — from Product Discovery and ROI definition to delivering high-value digital products from scratch."</p>
+              <p class="testi-name">Marina Ferreira Mendez</p>
+              <p class="testi-role">Group Product Manager · B2B Platform</p>
+            </div>
+            <div class="testimonial-card reveal delay-3">
+              <img src="assets/images/caio-photo.jpg" alt="Caio Prado Ferraz" style="width:40px;height:40px;border-radius:50%;object-fit:cover;flex-shrink:0;">
+              <p class="testi-text">"Yuki is results-focused and uses business objectives to drive smart design decisions. Her objectivity is her greatest strength — she works with agility while designing intentional experiences. Excellent team relationships and ideas that push beyond conventional approaches."</p>
+              <p class="testi-name">Caio Prado Ferraz</p>
+              <p class="testi-role">Design Lead · UOL</p>
+            </div>
           </div>
         </div>
 
