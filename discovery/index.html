@@ -7,335 +7,72 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Montserrat+Alternates:wght@500;600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    background: #F1EDE5;
-    font-family: 'Montserrat', sans-serif;
-    color: #181818;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem 1rem;
-  }
-
-  .card {
-    background: #fff;
-    border-radius: 16px;
-    padding: 2.5rem;
-    width: 100%;
-    max-width: 560px;
-    min-height: 460px;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2.5rem;
-  }
-
-  .brand {
-    font-family: 'Montserrat Alternates', sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    color: #015FA6;
-    letter-spacing: 0.02em;
-  }
-
-  .prog-wrap {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .prog-bar {
-    width: 100px;
-    height: 3px;
-    background: #E8E4DC;
-    border-radius: 2px;
-    overflow: hidden;
-  }
-
-  .prog-fill {
-    height: 100%;
-    background: #015FA6;
-    border-radius: 2px;
-    transition: width 0.35s ease;
-  }
-
-  .prog-label {
-    font-size: 12px;
-    color: #AAA;
-    min-width: 36px;
-    text-align: right;
-  }
-
+  body { background: #F1EDE5; font-family: 'Montserrat', sans-serif; color: #181818; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 2rem 1rem; }
+  .card { background: #fff; border-radius: 16px; padding: 2.5rem; width: 100%; max-width: 560px; min-height: 460px; display: flex; flex-direction: column; }
+  .top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2.5rem; }
+  .brand { font-family: 'Montserrat Alternates', sans-serif; font-size: 15px; font-weight: 600; color: #015FA6; letter-spacing: 0.02em; }
+  .prog-wrap { display: flex; align-items: center; gap: 10px; }
+  .prog-bar { width: 100px; height: 3px; background: #E8E4DC; border-radius: 2px; overflow: hidden; }
+  .prog-fill { height: 100%; background: #015FA6; border-radius: 2px; transition: width 0.35s ease; }
+  .prog-label { font-size: 12px; color: #AAA; min-width: 36px; text-align: right; }
   .body { flex: 1; display: flex; flex-direction: column; }
-
-  .section-tag {
-    font-size: 11px;
-    font-weight: 600;
-    color: #015FA6;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 0.75rem;
-  }
-
-  .question {
-    font-family: 'Montserrat Alternates', sans-serif;
-    font-size: 20px;
-    font-weight: 500;
-    color: #181818;
-    line-height: 1.4;
-    margin-bottom: 0.5rem;
-  }
-
-  .hint {
-    font-size: 13px;
-    color: #AAA;
-    font-style: italic;
-    margin-bottom: 1.75rem;
-    line-height: 1.5;
-  }
-
+  .section-tag { font-size: 11px; font-weight: 600; color: #015FA6; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.75rem; }
+  .question { font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 500; color: #181818; line-height: 1.4; margin-bottom: 0.5rem; }
+  .hint { font-size: 13px; color: #AAA; font-style: italic; margin-bottom: 1.75rem; line-height: 1.5; }
   .spacer { margin-bottom: 1.75rem; }
-
-  textarea {
-    width: 100%;
-    background: #F9F7F4;
-    border: 1.5px solid #E4E0D8;
-    border-radius: 10px;
-    padding: 14px 16px;
-    font-size: 15px;
-    font-family: 'Montserrat', sans-serif;
-    color: #181818;
-    resize: none;
-    outline: none;
-    line-height: 1.6;
-    min-height: 120px;
-    transition: border-color 0.2s;
-  }
-
+  textarea { width: 100%; background: #F9F7F4; border: 1.5px solid #E4E0D8; border-radius: 10px; padding: 14px 16px; font-size: 15px; font-family: 'Montserrat', sans-serif; color: #181818; resize: none; outline: none; line-height: 1.6; min-height: 120px; transition: border-color 0.2s; }
   textarea:focus { border-color: #015FA6; background: #fff; }
   textarea::placeholder { color: #C4C0B8; }
-
-  .voice-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin: 14px 0 0;
-  }
-
-  .mic-btn {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 20px;
-    background: #fff;
-    border: 1.5px solid #015FA6;
-    border-radius: 100px;
-    color: #015FA6;
-    font-size: 13px;
-    font-weight: 600;
-    font-family: 'Montserrat', sans-serif;
-    cursor: pointer;
-    transition: all 0.15s;
-    letter-spacing: 0.01em;
-  }
-
-  .mic-btn:hover { background: #015FA6; color: #fff; }
-
-  .mic-btn.recording {
-    background: #015FA6;
-    color: #fff;
-  }
-
-  .mic-icon {
-    width: 14px;
-    height: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .mic-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: currentColor;
-  }
-
+  input[type="text"], input[type="email"] { width: 100%; background: #F9F7F4; border: 1.5px solid #E4E0D8; border-radius: 10px; padding: 13px 16px; font-size: 15px; font-family: 'Montserrat', sans-serif; color: #181818; outline: none; transition: border-color 0.2s; margin-bottom: 12px; }
+  input[type="text"]:focus, input[type="email"]:focus { border-color: #015FA6; background: #fff; }
+  input::placeholder { color: #C4C0B8; }
+  .field-label { font-size: 11px; font-weight: 600; color: #AAA; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 6px; }
+  .field-group { margin-bottom: 4px; }
+  .voice-row { display: flex; align-items: center; gap: 12px; margin: 14px 0 0; }
+  .mic-btn { display: flex; align-items: center; gap: 8px; padding: 10px 20px; background: #fff; border: 1.5px solid #015FA6; border-radius: 100px; color: #015FA6; font-size: 13px; font-weight: 600; font-family: 'Montserrat', sans-serif; cursor: pointer; transition: all 0.15s; }
+  .mic-btn:hover, .mic-btn.recording { background: #015FA6; color: #fff; }
+  .mic-dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
   .mic-dot.pulse { animation: pulse 1s infinite; }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.4; transform: scale(0.8); }
-  }
-
+  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.8); } }
   .voice-note { font-size: 12px; color: #AAA; }
-
-  .nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: auto;
-    padding-top: 2rem;
-  }
-
-  .btn-back {
-    background: none;
-    border: none;
-    color: #AAA;
-    font-size: 14px;
-    font-family: 'Montserrat', sans-serif;
-    cursor: pointer;
-    padding: 8px 0;
-    transition: color 0.15s;
-  }
-
+  .nav { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 2rem; }
+  .btn-back { background: none; border: none; color: #AAA; font-size: 14px; font-family: 'Montserrat', sans-serif; cursor: pointer; padding: 8px 0; transition: color 0.15s; }
   .btn-back:hover { color: #181818; }
-
-  .btn-next {
-    background: #015FA6;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    padding: 13px 32px;
-    font-size: 14px;
-    font-weight: 600;
-    font-family: 'Montserrat', sans-serif;
-    cursor: pointer;
-    letter-spacing: 0.01em;
-    transition: opacity 0.15s;
-  }
-
+  .btn-next { background: #015FA6; color: #fff; border: none; border-radius: 8px; padding: 13px 32px; font-size: 14px; font-weight: 600; font-family: 'Montserrat', sans-serif; cursor: pointer; transition: opacity 0.15s; }
   .btn-next:hover { opacity: 0.88; }
   .btn-next:disabled { opacity: 0.3; cursor: not-allowed; }
-
   .done { text-align: center; flex: 1; display: flex; flex-direction: column; }
-
-  .done-icon {
-    width: 56px;
-    height: 56px;
-    background: #015FA6;
-    border-radius: 50%;
-    margin: 0 auto 1.25rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .done-icon svg {
-    width: 24px;
-    height: 24px;
-    stroke: #fff;
-    fill: none;
-    stroke-width: 2.5;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-  }
-
-  .done h2 {
-    font-family: 'Montserrat Alternates', sans-serif;
-    font-size: 20px;
-    font-weight: 500;
-    margin-bottom: 0.5rem;
-  }
-
-  .done p {
-    font-size: 14px;
-    color: #AAA;
-    margin-bottom: 2rem;
-    line-height: 1.6;
-  }
-
-  .summary {
-    background: #F9F7F4;
-    border-radius: 10px;
-    padding: 0.5rem 1.25rem;
-    text-align: left;
-    margin-bottom: 1.5rem;
-    flex: 1;
-    overflow-y: auto;
-    max-height: 280px;
-  }
-
-  .s-item {
-    padding: 12px 0;
-    border-bottom: 1px solid #EEE;
-  }
-
+  .done-icon { width: 56px; height: 56px; background: #015FA6; border-radius: 50%; margin: 0 auto 1.25rem; display: flex; align-items: center; justify-content: center; }
+  .done-icon svg { width: 24px; height: 24px; stroke: #fff; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+  .done h2, .sent h2 { font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 500; margin-bottom: 0.5rem; }
+  .done p, .sent p { font-size: 14px; color: #AAA; margin-bottom: 2rem; line-height: 1.6; }
+  .summary { background: #F9F7F4; border-radius: 10px; padding: 0.5rem 1.25rem; text-align: left; margin-bottom: 1.5rem; flex: 1; overflow-y: auto; max-height: 280px; }
+  .s-item { padding: 12px 0; border-bottom: 1px solid #EEE; }
   .s-item:last-child { border-bottom: none; }
-
-  .s-q {
-    font-size: 11px;
-    color: #AAA;
-    margin-bottom: 4px;
-    font-weight: 500;
-    letter-spacing: 0.02em;
-  }
-
-  .s-a {
-    font-size: 14px;
-    color: #181818;
-    line-height: 1.5;
-  }
-
-  .btn-submit {
-    width: 100%;
-    background: #015FA6;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    padding: 15px;
-    font-size: 15px;
-    font-weight: 600;
-    font-family: 'Montserrat', sans-serif;
-    cursor: pointer;
-    letter-spacing: 0.01em;
-    transition: opacity 0.15s;
-  }
-
+  .s-q { font-size: 11px; color: #AAA; margin-bottom: 4px; font-weight: 500; }
+  .s-a { font-size: 14px; color: #181818; line-height: 1.5; }
+  .btn-submit { width: 100%; background: #015FA6; color: #fff; border: none; border-radius: 8px; padding: 15px; font-size: 15px; font-weight: 600; font-family: 'Montserrat', sans-serif; cursor: pointer; transition: opacity 0.15s; }
   .btn-submit:hover { opacity: 0.88; }
-
   .sent { text-align: center; padding: 3rem 0; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-
-  .sent h2 {
-    font-family: 'Montserrat Alternates', sans-serif;
-    font-size: 22px;
-    font-weight: 500;
-    margin-bottom: 0.75rem;
-  }
-
-  .sent p { font-size: 14px; color: #AAA; line-height: 1.6; }
-
-  @media (max-width: 600px) {
-    .card { padding: 1.75rem 1.5rem; }
-    .question { font-size: 18px; }
-  }
+  @media (max-width: 600px) { .card { padding: 1.75rem 1.5rem; } .question { font-size: 18px; } }
 </style>
 </head>
 <body>
-
 <div class="card">
   <div class="top">
     <span class="brand">Discovery</span>
     <div class="prog-wrap">
       <div class="prog-bar"><div class="prog-fill" id="prog"></div></div>
-      <span class="prog-label" id="prog-label">1 / 12</span>
+      <span class="prog-label" id="prog-label"></span>
     </div>
   </div>
   <div class="body" id="view"></div>
 </div>
 
 <script>
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzqpHNJL3hEMIQMNrEubH3En_TqszfJi8AeKuF4PmOxg5DJnCkOpteOG16d1ZNRZzSd/exec';
+
 const questions = [
-  { section: "Identificação", q: "Qual é o seu nome?", hint: "" },
-  { section: "Identificação", q: "Qual é o nome da sua empresa?", hint: "" },
-  { section: "Identificação", q: "Qual é o seu email para contato?", hint: "" },
   { section: "O negócio", q: "O que você faz? Qual é o produto ou serviço principal?", hint: "" },
   { section: "O negócio", q: "Há quanto tempo você toca esse negócio?", hint: "" },
   { section: "O negócio", q: "Quem é seu cliente? Pessoa física, empresa, ou os dois?", hint: "" },
@@ -347,51 +84,93 @@ const questions = [
   { section: "Frustrações", q: "O que mais te frustra na hora de divulgar o negócio?", hint: "" },
   { section: "Frustrações", q: "O que você tentou que claramente não funcionou?", hint: "" },
   { section: "Objetivos", q: "Em 3 meses, o que precisaria acontecer para você falar 'valeu a pena'?", hint: "Você define o sucesso, não eu." },
-  { section: "Objetivos", q: "Se eu te entregasse um plano claro, o que te impediria de executar?", hint: "Essa é a mais importante. Responde com calma." }
+  { section: "Objetivos", q: "Se eu te entregasse um plano claro, o que te impediria de executar?", hint: "Essa é a mais importante. Responde com calma." },
+  { section: "Livre", q: "Qual é o principal problema ou foco que você quer resolver? Tem alguma ideia que queira compartilhar?", hint: "Fala à vontade. Sem filtro." }
 ];
 
-let current = 0;
+let idAnswers = { nome: '', empresa: '', email: '' };
 let answers = new Array(questions.length).fill('');
+let current = -1;
 let recognition = null;
 let isRecording = false;
+const total = questions.length;
 
-function pct() { return Math.round(((current + 1) / questions.length) * 100); }
+function updateProg() {
+  const pct = current === -1 ? 4 : current >= total ? 100 : Math.round(((current + 1) / total) * 100);
+  document.getElementById('prog').style.width = pct + '%';
+  document.getElementById('prog-label').textContent = current === -1 ? 'Início' : current >= total ? 'Revisão' : (current + 1) + ' / ' + total;
+}
 
 function render() {
-  document.getElementById('prog').style.width = pct() + '%';
-  document.getElementById('prog-label').textContent = (current + 1) + ' / ' + questions.length;
+  updateProg();
+  if (current === -1) { renderId(); return; }
+  if (current >= total) { renderDone(); return; }
+  renderQuestion();
+}
 
-  if (current >= questions.length) { renderDone(); return; }
+function renderId() {
+  document.getElementById('view').innerHTML = `
+    <div class="section-tag">Identificação</div>
+    <div class="question">Antes de começar, nos conte quem é você.</div>
+    <div class="spacer"></div>
+    <div class="field-group">
+      <div class="field-label">Nome</div>
+      <input type="text" id="f-nome" placeholder="Seu nome completo" value="${idAnswers.nome}">
+    </div>
+    <div class="field-group">
+      <div class="field-label">Empresa</div>
+      <input type="text" id="f-empresa" placeholder="Nome da empresa" value="${idAnswers.empresa}">
+    </div>
+    <div class="field-group">
+      <div class="field-label">Email</div>
+      <input type="email" id="f-email" placeholder="seu@email.com" value="${idAnswers.email}">
+    </div>
+    <div class="nav">
+      <span></span>
+      <button class="btn-next" id="btn-id-next" onclick="goFromId()">Começar</button>
+    </div>
+  `;
+  const check = () => {
+    const n = document.getElementById('f-nome').value.trim();
+    const e = document.getElementById('f-empresa').value.trim();
+    const m = document.getElementById('f-email').value.trim();
+    document.getElementById('btn-id-next').disabled = n.length < 2 || e.length < 2 || m.length < 3;
+  };
+  ['f-nome','f-empresa','f-email'].forEach(id => document.getElementById(id).addEventListener('input', check));
+  document.getElementById('btn-id-next').disabled = !(idAnswers.nome.length > 1 && idAnswers.empresa.length > 1 && idAnswers.email.length > 2);
+}
 
+function goFromId() {
+  idAnswers.nome = document.getElementById('f-nome').value.trim();
+  idAnswers.empresa = document.getElementById('f-empresa').value.trim();
+  idAnswers.email = document.getElementById('f-email').value.trim();
+  current = 0;
+  render();
+}
+
+function renderQuestion() {
   const item = questions[current];
-  const view = document.getElementById('view');
-
-  view.innerHTML = `
+  document.getElementById('view').innerHTML = `
     <div class="section-tag">${item.section}</div>
     <div class="question">${item.q}</div>
     ${item.hint ? '<div class="hint">' + item.hint + '</div>' : '<div class="spacer"></div>'}
     <textarea id="ans" placeholder="Digite ou use o microfone para responder…">${answers[current]}</textarea>
     <div class="voice-row">
       <button class="mic-btn" id="mic-btn" onclick="toggleVoice()">
-        <span class="mic-icon"><span class="mic-dot" id="mic-dot"></span></span>
+        <span class="mic-dot" id="mic-dot"></span>
         <span id="mic-label">Falar resposta</span>
       </button>
       <span class="voice-note" id="voice-note"></span>
     </div>
     <div class="nav">
-      <button class="btn-back" onclick="go(-1)" style="${current === 0 ? 'visibility:hidden' : ''}">Voltar</button>
-      <button class="btn-next" id="btn-next" onclick="go(1)">
-        ${current === questions.length - 1 ? 'Revisar respostas' : 'Próxima'}
-      </button>
+      <button class="btn-back" onclick="go(-1)">Voltar</button>
+      <button class="btn-next" id="btn-next" onclick="go(1)">${current === total - 1 ? 'Revisar respostas' : 'Próxima'}</button>
     </div>
   `;
-
-  const ta = document.getElementById('ans');
-  ta.addEventListener('input', function () {
+  document.getElementById('ans').addEventListener('input', function() {
     answers[current] = this.value;
     document.getElementById('btn-next').disabled = this.value.trim().length < 2;
   });
-
   document.getElementById('btn-next').disabled = answers[current].trim().length < 2;
 }
 
@@ -400,38 +179,28 @@ function go(dir) {
   const ta = document.getElementById('ans');
   if (ta) answers[current] = ta.value;
   if (dir === 1 && answers[current].trim().length < 2) return;
-  current = Math.max(0, Math.min(questions.length, current + dir));
+  current = Math.max(-1, Math.min(total, current + dir));
   render();
 }
 
-function toggleVoice() {
-  if (isRecording) { stopVoice(); return; }
-  startVoice();
-}
+function toggleVoice() { isRecording ? stopVoice() : startVoice(); }
 
 function startVoice() {
   const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if (!SR) {
-    document.getElementById('voice-note').textContent = 'Use o Chrome para ativar o microfone.';
-    return;
-  }
+  if (!SR) { document.getElementById('voice-note').textContent = 'Use o Chrome para ativar o microfone.'; return; }
   recognition = new SR();
   recognition.lang = 'pt-BR';
   recognition.continuous = true;
   recognition.interimResults = true;
-
   const base = answers[current];
-
   recognition.onstart = () => {
     isRecording = true;
     document.getElementById('mic-btn').classList.add('recording');
     document.getElementById('mic-dot').classList.add('pulse');
     document.getElementById('mic-label').textContent = 'Gravando… clique para parar';
   };
-
   recognition.onresult = (e) => {
-    let final = base;
-    let interim = '';
+    let final = base, interim = '';
     for (let i = e.resultIndex; i < e.results.length; i++) {
       if (e.results[i].isFinal) final += e.results[i][0].transcript + ' ';
       else interim += e.results[i][0].transcript;
@@ -442,12 +211,7 @@ function startVoice() {
     const btn = document.getElementById('btn-next');
     if (btn) btn.disabled = (final + interim).trim().length < 2;
   };
-
-  recognition.onerror = () => {
-    document.getElementById('voice-note').textContent = 'Permita o microfone e tente novamente.';
-    stopVoice();
-  };
-
+  recognition.onerror = () => { document.getElementById('voice-note').textContent = 'Permita o microfone e tente novamente.'; stopVoice(); };
   recognition.onend = () => { if (isRecording) stopVoice(); };
   recognition.start();
 }
@@ -464,61 +228,33 @@ function stopVoice() {
 }
 
 function renderDone() {
-  document.getElementById('prog').style.width = '100%';
-  document.getElementById('prog-label').textContent = 'Revisão';
-
-  const summary = questions.map((item, i) => `
-    <div class="s-item">
-      <div class="s-q">${item.q}</div>
-      <div class="s-a">${answers[i] || '—'}</div>
-    </div>
-  `).join('');
-
+  const idSum = ['Nome','Empresa','Email'].map((l,i) => `<div class="s-item"><div class="s-q">${l}</div><div class="s-a">${Object.values(idAnswers)[i]}</div></div>`).join('');
+  const qSum = questions.map((item,i) => `<div class="s-item"><div class="s-q">${item.q}</div><div class="s-a">${answers[i]||'—'}</div></div>`).join('');
   document.getElementById('view').innerHTML = `
     <div class="done">
-      <div class="done-icon">
-        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-      </div>
+      <div class="done-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
       <h2>Pronto para enviar</h2>
       <p>Revise suas respostas abaixo.<br>Você pode voltar e editar qualquer uma.</p>
-      <div class="summary">${summary}</div>
+      <div class="summary">${idSum}${qSum}</div>
       <button class="btn-submit" onclick="submit()">Enviar para análise</button>
-      <div style="margin-top:12px">
-        <button class="btn-back" onclick="current=questions.length-1;render()">Editar respostas</button>
-      </div>
+      <div style="margin-top:12px"><button class="btn-back" onclick="current=total-1;render()">Editar respostas</button></div>
     </div>
   `;
 }
 
 function submit() {
-  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzqpHNJL3hEMIQMNrEubH3En_TqszfJi8AeKuF4PmOxg5DJnCkOpteOG16d1ZNRZzSd/exec';
-  const payload = questions.map((item, i) => ({ pergunta: item.q, resposta: answers[i] || '' }));
-
-  document.getElementById('view').innerHTML = `
-    <div class="sent">
-      <div class="done-icon" style="background:#E4E0D8">
-        <svg viewBox="0 0 24 24" style="stroke:#015FA6;fill:none;stroke-width:2.5;stroke-linecap:round"><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/></svg>
-      </div>
-      <h2>Enviando…</h2>
-      <p>Só um segundo.</p>
-    </div>
-  `;
+  const payload = [
+    { pergunta: 'Nome', resposta: idAnswers.nome },
+    { pergunta: 'Empresa', resposta: idAnswers.empresa },
+    { pergunta: 'Email', resposta: idAnswers.email },
+    ...questions.map((item,i) => ({ pergunta: item.q, resposta: answers[i]||'' }))
+  ];
+  document.getElementById('view').innerHTML = `<div class="sent"><div class="done-icon" style="background:#E4E0D8"><svg viewBox="0 0 24 24" style="stroke:#015FA6;fill:none;stroke-width:2;stroke-linecap:round"><circle cx="12" cy="12" r="6"/></svg></div><h2>Enviando…</h2><p>Só um segundo.</p></div>`;
   document.getElementById('prog').style.width = '100%';
   document.getElementById('prog-label').textContent = '';
-
-  fetch(SCRIPT_URL + '?data=' + encodeURIComponent(JSON.stringify(payload)), {
-    method: 'GET',
-    mode: 'no-cors'
-  }).finally(() => {
-    document.getElementById('view').innerHTML = `
-      <div class="sent">
-        <div class="done-icon">
-          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        <h2>Respostas enviadas</h2>
-        <p>Obrigada pelo seu tempo.<br>Vou analisar e entrar em contato em breve.</p>
-      </div>
-    `;
+  fetch(SCRIPT_URL + '?data=' + encodeURIComponent(JSON.stringify(payload)), { method: 'GET', mode: 'no-cors' })
+  .finally(() => {
+    document.getElementById('view').innerHTML = `<div class="sent"><div class="done-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><h2>Respostas enviadas</h2><p>Obrigada pelo seu tempo.<br>Vou analisar e entrar em contato em breve.</p></div>`;
   });
 }
 
