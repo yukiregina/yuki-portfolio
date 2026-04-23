@@ -488,7 +488,7 @@ function renderDone() {
 }
 
 function submit() {
-  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwVmnLMRh5r7rmEuKY8Kghj2heS-8YreuuP5pzDMEtXB5ZEHvaX1HPbLX_2uU5_it-B/exec';
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwRkb1CS92X7WZfFk_8ri9AWS-QSu9DyMwiEWS7PXXHP7JIR4SYVA30dz5BECZhSnit/exec';
   const payload = questions.map((item, i) => ({ pergunta: item.q, resposta: answers[i] || '' }));
 
   document.getElementById('view').innerHTML = `
