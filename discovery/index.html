@@ -488,7 +488,7 @@ function renderDone() {
 }
 
 function submit() {
-  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwRkb1CS92X7WZfFk_8ri9AWS-QSu9DyMwiEWS7PXXHP7JIR4SYVA30dz5BECZhSnit/exec';
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzqpHNJL3hEMIQMNrEubH3En_TqszfJi8AeKuF4PmOxg5DJnCkOpteOG16d1ZNRZzSd/exec';
   const payload = questions.map((item, i) => ({ pergunta: item.q, resposta: answers[i] || '' }));
 
   document.getElementById('view').innerHTML = `
@@ -503,11 +503,9 @@ function submit() {
   document.getElementById('prog').style.width = '100%';
   document.getElementById('prog-label').textContent = '';
 
-  fetch(SCRIPT_URL, {
-    method: 'POST',
-    mode: 'no-cors',
-    headers: { 'Content-Type': 'text/plain' },
-    body: JSON.stringify(payload)
+  fetch(SCRIPT_URL + '?data=' + encodeURIComponent(JSON.stringify(payload)), {
+    method: 'GET',
+    mode: 'no-cors'
   }).finally(() => {
     document.getElementById('view').innerHTML = `
       <div class="sent">
