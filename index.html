@@ -396,13 +396,6 @@
               <span class="project-type">Product Design</span>
             </div>
             <h3 class="project-title">B2B Product Catalogue</h3>
-            <p class="project-nda">
-              <svg width="11" height="13" viewBox="0 0 11 13" fill="none" aria-hidden="true">
-                <rect x="1" y="5.5" width="9" height="7" rx="1.5" stroke="currentColor" stroke-width="1.4"/>
-                <path d="M3.5 5.5V3.5a2 2 0 0 1 4 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
-              </svg>
-              Under NDA
-            </p>
             <p class="project-synopsis">No PM, no existing flow. Designed a missing feature from scratch, shipped it, and mapped the next opportunity before leaving the team. 2× user growth and 20× more catalog downloads in the six months post-launch.</p>
             <div class="project-arrow" aria-hidden="true">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -423,14 +416,7 @@
               <span class="project-type">UX Research · Service Design</span>
             </div>
             <h3 class="project-title">Transactional Journey</h3>
-            <p class="project-nda">
-              <svg width="11" height="13" viewBox="0 0 11 13" fill="none" aria-hidden="true">
-                <rect x="1" y="5.5" width="9" height="7" rx="1.5" stroke="currentColor" stroke-width="1.4"/>
-                <path d="M3.5 5.5V3.5a2 2 0 0 1 4 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
-              </svg>
-              Under NDA
-            </p>
-            <p class="project-synopsis">End-to-end research across 6 teams and 12 systems. The problem everyone assumed it was — wasn't. Two insights I identified became the leading brief for the next cycle.</p>
+            <p class="project-synopsis">End-to-end research across 6 teams and 12 systems. The problem everyone assumed it was. Wasn't. Two insights I identified became the leading brief for the next cycle.</p>
             <div class="project-arrow" aria-hidden="true">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                 <path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
@@ -459,7 +445,7 @@
           </p>
           <div class="about-inline-body reveal">
             <p>I trained as a Graphic Designer in Tokyo, where restraint is a discipline. I built most of my career in São Paulo, where complexity is the starting point. Both shaped the same habit: slow down on the question, move fast on the answer.</p>
-            <p>From Art Direction to Product Design, every step pointed in the same direction. When design truly serves people, business growth follows.</p>
+            <p>From Art Direction to Product Design, every step pointed in the same direction. When the design is right, the business numbers move.</p>
             <p><strong>Open to remote, global roles.</strong></p>
           </div>
         </div>
@@ -578,128 +564,6 @@
       </div>
     </div>
   </footer>
-
-  <!-- ── NDA modal ──────────────────────────────────────── -->
-  <div class="nda-modal" id="nda-modal" role="dialog" aria-modal="true" aria-labelledby="nda-modal-title">
-    <div class="nda-modal-backdrop" id="nda-backdrop"></div>
-    <div class="nda-modal-box">
-      <button class="nda-modal-close" id="nda-close" aria-label="Close">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-          <path d="M2 2l12 12M14 2L2 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-        </svg>
-      </button>
-      <div class="nda-modal-icon" aria-hidden="true">
-        <svg width="28" height="32" viewBox="0 0 28 32" fill="none">
-          <rect x="2" y="13" width="24" height="17" rx="3" stroke="currentColor" stroke-width="2"/>
-          <path d="M8 13V9a6 6 0 0 1 12 0v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          <circle cx="14" cy="21.5" r="2" fill="currentColor"/>
-        </svg>
-      </div>
-      <h2 class="nda-modal-title" id="nda-modal-title">Protected case study</h2>
-      <p class="nda-modal-desc">This project is under NDA. Enter the password to view it.</p>
-      <form class="nda-modal-form" id="nda-form" novalidate>
-        <input
-          class="nda-modal-input"
-          id="nda-input"
-          type="password"
-          placeholder="Password"
-          autocomplete="off"
-          spellcheck="false"
-        >
-        <button type="submit" class="nda-modal-btn">View case study →</button>
-      </form>
-      <p class="nda-modal-error" id="nda-error" hidden>Incorrect password. Try again.</p>
-      <p class="nda-modal-contact">Don't have the password? <a href="#contact" onclick="document.getElementById('nda-modal').classList.remove('is-open');document.body.style.overflow=''">Get in touch</a></p>
-    </div>
-  </div>
-
-  <style>
-    .nda-modal {
-      position: fixed; inset: 0;
-      z-index: 9000;
-      display: flex; align-items: center; justify-content: center;
-      padding: 24px;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.25s ease;
-    }
-    .nda-modal.is-open { pointer-events: all; opacity: 1; }
-    .nda-modal-backdrop {
-      position: absolute; inset: 0;
-      background: rgba(0,0,0,0.55);
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
-    }
-    .nda-modal-box {
-      position: relative; z-index: 1;
-      background: var(--white);
-      border-radius: 20px;
-      padding: clamp(32px, 5vw, 52px);
-      width: 100%; max-width: 420px;
-      box-shadow: 0 32px 80px rgba(0,0,0,0.22);
-      transform: translateY(16px) scale(0.98);
-      transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);
-      text-align: center;
-    }
-    .nda-modal.is-open .nda-modal-box { transform: translateY(0) scale(1); }
-    .nda-modal-close {
-      position: absolute; top: 18px; right: 18px;
-      width: 32px; height: 32px;
-      display: flex; align-items: center; justify-content: center;
-      border: none; background: none; cursor: pointer;
-      color: var(--text-muted); border-radius: 8px;
-      transition: background 0.2s, color 0.2s;
-    }
-    .nda-modal-close:hover { background: var(--surface); color: var(--text); }
-    .nda-modal-icon {
-      width: 56px; height: 56px;
-      background: rgba(1,95,166,0.08);
-      border-radius: 16px;
-      display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 20px;
-      color: var(--indigo);
-    }
-    .nda-modal-title {
-      font-family: var(--font-alt);
-      font-size: 22px; font-weight: 700;
-      color: var(--text); margin-bottom: 8px;
-    }
-    .nda-modal-desc {
-      font-size: 14px; color: var(--text-muted);
-      line-height: 1.55; margin-bottom: 28px;
-    }
-    .nda-modal-form { display: flex; flex-direction: column; gap: 12px; }
-    .nda-modal-input {
-      width: 100%; padding: 13px 18px;
-      font-size: 15px; font-family: var(--font-body);
-      border: 1.5px solid var(--border); border-radius: 10px;
-      background: var(--surface); color: var(--text);
-      outline: none; transition: border-color 0.2s;
-      text-align: center; letter-spacing: 0.1em;
-      box-sizing: border-box;
-    }
-    .nda-modal-input:focus { border-color: var(--indigo); }
-    .nda-modal-btn {
-      width: 100%; padding: 13px 18px;
-      background: var(--indigo); color: var(--white);
-      font-size: 14px; font-weight: 600;
-      font-family: var(--font-body);
-      border: none; border-radius: 10px; cursor: pointer;
-      transition: opacity 0.2s, transform 0.2s;
-    }
-    .nda-modal-btn:hover { opacity: 0.88; transform: translateY(-1px); }
-    .nda-modal-error { font-size: 13px; color: #C0392B; margin-top: 10px; font-weight: 500; }
-    .nda-modal-contact { font-size: 13px; color: var(--text-muted); margin-top: 20px; }
-    .nda-modal-contact a { color: var(--indigo); }
-    @keyframes shake {
-      0%, 100% { transform: translateX(0); }
-      20%       { transform: translateX(-6px); }
-      40%       { transform: translateX(6px); }
-      60%       { transform: translateX(-4px); }
-      80%       { transform: translateX(4px); }
-    }
-    .nda-modal-input.shake { animation: shake 0.45s ease; }
-  </style>
 
   <script src="assets/js/main.js"></script>
   <script>
@@ -947,68 +811,6 @@
     });
   })();
 
-  /* ── NDA password modal ───────────────────────────────── */
-  (function() {
-    // ↓ Change this to your chosen password
-    const PASSWORD = 'yukiregina';
-
-    const modal    = document.getElementById('nda-modal');
-    const form     = document.getElementById('nda-form');
-    const input    = document.getElementById('nda-input');
-    const errorMsg = document.getElementById('nda-error');
-    let   target   = null;
-
-    function open(href) {
-      target = href;
-      input.value = '';
-      errorMsg.hidden = true;
-      modal.classList.add('is-open');
-      requestAnimationFrame(() => input.focus());
-      document.body.style.overflow = 'hidden';
-    }
-
-    function close() {
-      modal.classList.remove('is-open');
-      document.body.style.overflow = '';
-      target = null;
-    }
-
-    // Intercept NDA card clicks
-    document.querySelectorAll('.project-card').forEach(card => {
-      if (!card.querySelector('.project-nda')) return;
-      card.addEventListener('click', e => {
-        e.preventDefault();
-        // Already unlocked this session? Go straight through
-        if (sessionStorage.getItem('nda-unlocked') === '1') {
-          window.location.href = card.getAttribute('href');
-          return;
-        }
-        open(card.getAttribute('href'));
-      });
-    });
-
-    // Submit
-    form.addEventListener('submit', e => {
-      e.preventDefault();
-      if (input.value === PASSWORD) {
-        sessionStorage.setItem('nda-unlocked', '1');
-        const dest = target;   // capture before close() nulls it
-        close();
-        window.location.href = dest;
-      } else {
-        errorMsg.hidden = false;
-        input.value = '';
-        input.focus();
-        input.classList.add('shake');
-        setTimeout(() => input.classList.remove('shake'), 500);
-      }
-    });
-
-    // Close on backdrop / close button / Escape
-    document.getElementById('nda-backdrop').addEventListener('click', close);
-    document.getElementById('nda-close').addEventListener('click', close);
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
-  })();
   </script>
 
 
