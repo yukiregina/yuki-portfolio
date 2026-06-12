@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let mx = 0, my = 0;   // mouse position
     let rx = 0, ry = 0;   // ring position (lagged)
     const speed = 0.11;
+    let cursorActive = !document.hidden;
 
     document.addEventListener('mousemove', e => {
       mx = e.clientX;
@@ -31,11 +32,17 @@ document.addEventListener('DOMContentLoaded', () => {
       dot.style.top  = my + 'px';
     });
 
+    document.addEventListener('visibilitychange', () => {
+      cursorActive = !document.hidden;
+    });
+
     (function animRing() {
-      rx += (mx - rx) * speed;
-      ry += (my - ry) * speed;
-      ring.style.left = rx + 'px';
-      ring.style.top  = ry + 'px';
+      if (cursorActive) {
+        rx += (mx - rx) * speed;
+        ry += (my - ry) * speed;
+        ring.style.left = rx + 'px';
+        ring.style.top  = ry + 'px';
+      }
       requestAnimationFrame(animRing);
     })();
 
@@ -84,52 +91,45 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 
-  /* ── 03. Hero headline mask reveal ────────────────────── */
-  const heroLines = document.querySelectorAll('.reveal-line');
-  if (heroLines.length) {
-    // Small delay so layout is painted before animation starts
-    requestAnimationFrame(() => {
-      setTimeout(() => {
-        heroLines.forEach(l => l.classList.add('animated'));
-      }, 180);
-    });
-  }
-
-  // Hero supporting elements fade up
-  document.querySelectorAll('.hero-fade').forEach((el, i) => {
-    el.style.opacity    = '0';
-    el.style.transform  = 'translateY(16px)';
-    el.style.transition = `opacity 0.7s ease ${0.55 + i * 0.12}s, transform 0.7s ease ${0.55 + i * 0.12}s`;
-    setTimeout(() => {
-      el.style.opacity   = '1';
-      el.style.transform = 'translateY(0)';
-    }, 100);
-  });
-
-  // Badge entrance
-  const badge = document.querySelector('.badge');
-  if (badge) {
-    badge.style.cssText += 'opacity:0;transform:translateY(10px) scale(0.96);transition:opacity 0.5s ease 0.35s,transform 0.5s ease 0.35s';
-    setTimeout(() => {
-      badge.style.opacity   = '1';
-      badge.style.transform = 'translateY(0) scale(1)';
-    }, 100);
-  }
+  /* ── 03. Hero entrance ────────────────────────────────── */
+  // Hero entrance (headline mask reveal, supporting fades, badge) is now
+  // driven entirely by fast, mount-fired CSS animations in index.html so
+  // the first viewport is readable within ~500ms with no JS dependency.
 
 
   /* ── 04. Scroll reveal (IntersectionObserver) ─────────── */
+  const prefersReducedMotion =
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   const revealEls = document.querySelectorAll('.reveal, .reveal-scale');
   if (revealEls.length) {
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('revealed');
-          io.unobserve(entry.target);
-        }
+    if (prefersReducedMotion) {
+      // No entrance animation — show everything immediately.
+      revealEls.forEach(el => el.classList.add('revealed'));
+    } else {
+      // Above-the-fold elements reveal on mount — never wait for a scroll.
+      requestAnimationFrame(() => {
+        revealEls.forEach(el => {
+          if (el.getBoundingClientRect().top < window.innerHeight) {
+            el.classList.add('revealed');
+          }
+        });
       });
-    }, { threshold: 0.10, rootMargin: '0px 0px -40px 0px' });
 
-    revealEls.forEach(el => io.observe(el));
+      // Everything below the fold reveals once it is ~20% into the viewport.
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0, rootMargin: '0px 0px -20% 0px' });
+
+      revealEls.forEach(el => {
+        if (!el.classList.contains('revealed')) io.observe(el);
+      });
+    }
   }
 
 
@@ -171,31 +171,37 @@ document.addEventListener('DOMContentLoaded', () => {
   overlay.style.cssText = `
     position:fixed;inset:0;background:var(--bg);
     z-index:9990;opacity:0;pointer-events:none;
-    transition:opacity 0.32s ease;
+    transition:opacity 0.22s ease;
   `;
   document.body.appendChild(overlay);
 
-  // Fade in on page load
-  overlay.style.opacity        = '1';
-  overlay.style.pointerEvents  = 'all';
-  requestAnimationFrame(() => requestAnimationFrame(() => {
-    overlay.style.opacity       = '0';
-    overlay.style.pointerEvents = 'none';
-  }));
+  // Fade in on page load — skipped entirely when reduced motion is preferred
+  // so content is never briefly hidden behind the overlay.
+  if (!prefersReducedMotion) {
+    overlay.style.opacity        = '1';
+    overlay.style.pointerEvents  = 'all';
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      overlay.style.opacity       = '0';
+      overlay.style.pointerEvents = 'none';
+    }));
+  }
 
   // Fade out on link click
   document.querySelectorAll('a[href]').forEach(link => {
     const href = link.getAttribute('href');
     if (!href || href.startsWith('#') || href.startsWith('mailto') ||
         href.startsWith('tel') || href.startsWith('http')) return;
+    // Let downloads (e.g. the CV PDF) and explicit new-tab links behave natively
+    if (link.hasAttribute('download') || link.getAttribute('target') === '_blank') return;
     // NDA cards handle their own navigation via the password modal — skip them
     if (link.querySelector('.project-nda')) return;
 
     link.addEventListener('click', e => {
+      if (prefersReducedMotion) return; // navigate normally, no transition
       e.preventDefault();
       overlay.style.opacity       = '1';
       overlay.style.pointerEvents = 'all';
-      setTimeout(() => { window.location.href = href; }, 320);
+      setTimeout(() => { window.location.href = href; }, 220);
     });
   });
 
@@ -218,7 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (logoMark) {
     logoMark.style.transform  = 'rotate(-90deg)';
     logoMark.style.opacity    = '0';
-    logoMark.style.transition = 'transform 0.8s cubic-bezier(0.34,1.56,0.64,1) 0.1s, opacity 0.4s ease 0.1s';
+    logoMark.style.transition = 'transform 0.3s cubic-bezier(0.34,1.56,0.64,1) 0.05s, opacity 0.3s ease 0.05s';
     requestAnimationFrame(() => requestAnimationFrame(() => {
       logoMark.style.transform = 'rotate(0deg)';
       logoMark.style.opacity   = '1';
@@ -229,8 +235,43 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ── 10. Staggered children of [data-stagger] ──────────── */
   document.querySelectorAll('[data-stagger]').forEach(group => {
     group.querySelectorAll('.reveal, .reveal-scale').forEach((child, i) => {
-      child.style.transitionDelay = `${i * 0.09}s`;
+      child.style.transitionDelay = `${Math.min(i, 3) * 0.05}s`;
     });
+  });
+
+
+  /* ── 11. Lazy-load / pause case-study videos ───────────── */
+  document.querySelectorAll('video').forEach(video => {
+    video.preload = 'none';
+
+    if (prefersReducedMotion) {
+      video.removeAttribute('autoplay');
+      video.pause();
+      return;
+    }
+
+    const syncPlayback = () => {
+      const r = video.getBoundingClientRect();
+      const inView = r.bottom > 0 && r.top < window.innerHeight;
+      if (inView && !document.hidden) {
+        video.play().catch(() => {});
+      } else {
+        video.pause();
+      }
+    };
+
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !document.hidden) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      });
+    }, { threshold: 0.2 });
+
+    io.observe(video);
+    document.addEventListener('visibilitychange', syncPlayback);
   });
 
 });

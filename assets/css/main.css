@@ -1,9 +1,8 @@
 /* ============================================================
    YUKI REGINA — Portfolio Design System
    Brand: beige + ocean blue · Montserrat Alternates + Montserrat
+   Fonts loaded via <link> in HTML (preconnect + display=swap)
    ============================================================ */
-
-@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap');
 
 /* ── Design Tokens ─────────────────────────────────────────── */
 :root {
@@ -17,7 +16,9 @@
   --indigo-dimmer:rgba(1, 95, 166, 0.05);
   --text:         #181818;
   --text-mid:     #484848;
-  --text-muted:   #888;
+  /* Darkened from #888 (failed WCAG AA on the cream bg) to a warm grey
+     that clears 4.5:1 on #E9E4DB while keeping the muted, warm hue. */
+  --text-muted:   #615C54;
   --border:       rgba(24, 24, 24, 0.09);
   --white:        #FFFFFF;
 
@@ -219,6 +220,20 @@ body.cursor-hidden .cursor-dot { opacity: 0; }
   margin-bottom: 28px;
   max-width: 15ch;
 }
+@media (min-width: 769px) {
+  /* Two intentional lines — prevent mid-line wraps at large type sizes */
+  .hero-headline {
+    max-width: none;
+  }
+  .hero-headline .reveal-line span {
+    white-space: nowrap;
+  }
+  /* Subline fits on one row at desktop widths */
+  .hero-sub {
+    max-width: none;
+    white-space: nowrap;
+  }
+}
 .hero-headline .accent { color: var(--indigo); }
 .hero-sub {
   max-width: 480px;
@@ -246,18 +261,18 @@ body.cursor-hidden .cursor-dot { opacity: 0; }
   opacity: 0;
 }
 .reveal-line.animated span {
-  animation: lineReveal 0.85s var(--ease-out) forwards;
+  animation: lineReveal 0.3s var(--ease-out) forwards;
 }
-.reveal-line:nth-child(2) span { animation-delay: 0.09s; }
-.reveal-line:nth-child(3) span { animation-delay: 0.18s; }
-.reveal-line:nth-child(4) span { animation-delay: 0.27s; }
+.reveal-line:nth-child(2) span { animation-delay: 0.06s; }
+.reveal-line:nth-child(3) span { animation-delay: 0.12s; }
+.reveal-line:nth-child(4) span { animation-delay: 0.18s; }
 @keyframes lineReveal {
   to { transform: translateY(0); opacity: 1; }
 }
 .hero-fade {
   opacity: 0;
-  transform: translateY(14px);
-  transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+  transform: translateY(10px);
+  transition: opacity 0.3s var(--ease-out), transform 0.3s var(--ease-out);
 }
 .hero-fade.visible {
   opacity: 1;
@@ -416,7 +431,7 @@ body.cursor-hidden .cursor-dot { opacity: 0; }
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.45);
+  color: rgba(255,255,255,0.62);
 }
 .project-title {
   font-family: var(--font-alt);
@@ -520,7 +535,7 @@ body.cursor-hidden .cursor-dot { opacity: 0; }
 }
 .project-card.card-light .project-year,
 .project-card.card-light .project-type {
-  color: rgba(0,0,0,0.38);
+  color: rgba(0,0,0,0.6);
 }
 .project-card.card-light .project-title {
   /* #015FA6 on #FAFAF8 = 9.5:1 — passes WCAG AAA */
@@ -1450,22 +1465,24 @@ footer {
 }
 
 /* ── Scroll Reveal ──────────────────────────────────────────── */
+/* Fast (≤300ms) and subtle: small translateY, never a hard fade from 0
+   for long. Above-the-fold elements are revealed on mount via JS. */
 .reveal {
   opacity: 0;
-  transform: translateY(26px);
-  transition: opacity 0.75s var(--ease-out), transform 0.75s var(--ease-out);
+  transform: translateY(10px);
+  transition: opacity 0.3s var(--ease-out), transform 0.3s var(--ease-out);
 }
 .reveal.revealed { opacity: 1; transform: translateY(0); }
 .reveal-scale {
   opacity: 0;
-  transform: scale(0.96);
-  transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+  transform: scale(0.98);
+  transition: opacity 0.3s var(--ease-out), transform 0.3s var(--ease-out);
 }
 .reveal-scale.revealed { opacity: 1; transform: scale(1); }
-.delay-1 { transition-delay: 0.10s; }
-.delay-2 { transition-delay: 0.20s; }
-.delay-3 { transition-delay: 0.30s; }
-.delay-4 { transition-delay: 0.40s; }
+.delay-1 { transition-delay: 0.05s; }
+.delay-2 { transition-delay: 0.10s; }
+.delay-3 { transition-delay: 0.15s; }
+.delay-4 { transition-delay: 0.20s; }
 
 /* ── Responsive ─────────────────────────────────────────────── */
 @media (max-width: 1024px) {
@@ -1494,8 +1511,31 @@ footer {
 }
 @media (max-width: 540px) {
   :root { --pad-x: 20px; }
+  .nav-links { gap: 16px; }
   .hero-actions { flex-direction: column; align-items: flex-start; }
   .case-results-row { grid-template-columns: 1fr; }
   .case-numbers { gap: 24px; }
   .project-card { min-height: auto; }
+}
+
+/* ── Reduced motion ─────────────────────────────────────────── */
+/* Disable all entrance/ambient animation when the user asks for it.
+   Reveal elements are forced to their final, readable state. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal,
+  .reveal-scale,
+  .reveal-line span,
+  .hero-fade,
+  .time-greeting {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }

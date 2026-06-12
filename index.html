@@ -23,257 +23,11 @@
   <meta name="twitter:image" content="https://yukiregina.com.br/assets/images/logo-mark.png">
   <meta name="theme-color" content="#E9E4DB">
   <title>Yuki Regina | Senior Product Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="assets/css/main.css">
-  <style>
-    /* ── Hero layers ─────────────────────────────────────── */
-    .hero { position: relative; overflow: hidden; }
-    .hero > .container { position: relative; z-index: 3; pointer-events: none; }
-    .hero > .container a,
-    .hero > .container button { pointer-events: auto; }
-
-    /* Layer 1 — time-of-day orbs */
-    #hero-canvas {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      pointer-events: none; z-index: 0;
-      opacity: 0; transition: opacity 1.4s ease;
-    }
-    #hero-canvas.loaded { opacity: 1; }
-
-    /* Layer 2 — aurora stripe (Stripe-style, right side) */
-    .aurora-right {
-      position: absolute;
-      top: -30%; right: -8%;
-      width: 65%; height: 160%;
-      pointer-events: none; z-index: 1;
-      opacity: 0;
-      transition: opacity 2s ease 0.5s;
-      border-radius: 50%;
-      background: conic-gradient(
-        from 200deg at 55% 45%,
-        rgba(1,95,166,0.00)   0deg,
-        rgba(1,95,166,0.13)  55deg,
-        rgba(74,144,226,0.10) 100deg,
-        rgba(200,216,240,0.08) 155deg,
-        rgba(1,51,102,0.11)  210deg,
-        rgba(1,95,166,0.07)  280deg,
-        rgba(1,95,166,0.00)  360deg
-      );
-      filter: blur(55px);
-      animation: aurora-pulse 9s ease-in-out infinite alternate;
-    }
-    .aurora-right.loaded { opacity: 1; }
-    @keyframes aurora-pulse {
-      0%   { transform: rotate(0deg)   scale(1.00); filter: blur(55px); }
-      33%  { transform: rotate(8deg)   scale(1.06); filter: blur(48px); }
-      66%  { transform: rotate(-5deg)  scale(0.97); filter: blur(60px); }
-      100% { transform: rotate(12deg)  scale(1.04); filter: blur(52px); }
-    }
-
-    /* Layer 3 — Japanese chars + ripple canvas */
-    #hero-fx {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      z-index: 2;
-      pointer-events: auto;
-      cursor: crosshair;
-    }
-
-    /* ── Hero entrance — CSS-only, no JS required ───────── */
-    @keyframes heroLineIn {
-      from { opacity: 0; transform: translateY(105%); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes heroFadeUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Aurora gradient sweeps across headline — CSS only */
-    @keyframes textAurora {
-      0%   { background-position: 200% center; }
-      45%  { background-position: 0%   center; }
-      100% { background-position: -80% center; }
-    }
-    .hero .reveal-line span {
-      display: block;
-      background: linear-gradient(105deg, #181818 15%, #015FA6 42%, #4A90E2 52%, #181818 72%);
-      background-size: 280% auto;
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: heroLineIn 0.85s cubic-bezier(0.16,1,0.3,1) 0.15s both,
-                 textAurora 9s ease-in-out 1.2s infinite;
-    }
-    .hero .reveal-line:nth-child(2) span {
-      animation-delay: 0.30s, 1.35s;
-    }
-
-    /* Badge, kicker, sub, actions fade up on load */
-    .hero .badge        { animation: heroFadeUp 0.7s ease 0.45s both; }
-    .hero .hero-kicker  { animation: heroFadeUp 0.7s ease 0.55s both; }
-    .hero .hero-sub     { animation: heroFadeUp 0.7s ease 0.70s both; }
-    .hero .hero-actions { animation: heroFadeUp 0.7s ease 0.85s both; }
-
-    /* Headline — always visible, accent in brand blue */
-    .hero-headline       { color: #181818; }
-    .hero-headline .accent { color: #015FA6; -webkit-text-fill-color: #015FA6; }
-
-    /* Time greeting */
-    .time-greeting {
-      font-size: 11px; font-weight: 600;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--text-muted); margin-bottom: 14px;
-      animation: heroFadeUp 0.6s ease 1.0s both;
-    }
-
-    /* ── Single-page section anchors ────────────────────── */
-    #work    { scroll-margin-top: 80px; }
-    #about   { scroll-margin-top: 80px; }
-    #contact { scroll-margin-top: 80px; }
-
-    /* ── Contact inline ─────────────────────────────────── */
-    .contact-inline {
-      padding: var(--section-gap) 0;
-      border-top: 1px solid var(--border);
-    }
-    .contact-inline-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-    }
-    .contact-inline-headline {
-      font-family: var(--font-alt);
-      font-size: clamp(28px, 4.5vw, 56px);
-      font-weight: 700;
-      color: var(--indigo);
-      letter-spacing: -0.03em;
-      line-height: 1.1;
-    }
-    .contact-inline-links {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-    .contact-inline-link {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 20px 0;
-      border-bottom: 1px solid var(--border);
-      color: var(--text);
-      transition: color 0.25s var(--ease);
-    }
-    .contact-inline-link:first-child { border-top: 1px solid var(--border); }
-    .contact-inline-link:hover { color: var(--indigo); }
-    .contact-inline-link-left {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-    .contact-inline-icon {
-      width: 36px; height: 36px;
-      background: var(--indigo-dimmer);
-      border-radius: var(--radius-sm);
-      display: flex; align-items: center; justify-content: center;
-      color: var(--indigo);
-      flex-shrink: 0;
-      transition: background 0.25s, transform 0.3s var(--ease-spring);
-    }
-    .contact-inline-link:hover .contact-inline-icon {
-      background: var(--indigo-dim);
-      transform: scale(1.08) rotate(-5deg);
-    }
-    .contact-inline-label {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      display: block;
-      margin-bottom: 2px;
-    }
-    .contact-inline-value {
-      font-size: 15px;
-      font-weight: 500;
-    }
-    .contact-inline-arrow {
-      color: var(--text-muted);
-      transition: transform 0.3s var(--ease), color 0.25s;
-    }
-    .contact-inline-link:hover .contact-inline-arrow {
-      transform: translate(3px, -3px);
-      color: var(--indigo);
-    }
-
-    /* ── About inline ───────────────────────────────────── */
-    .about-inline {
-      padding: var(--section-gap) 0;
-      border-top: 1px solid var(--border);
-    }
-    .about-inline-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-    }
-    .about-inline-quote {
-      font-family: var(--font-alt);
-      font-size: clamp(18px, 2.2vw, 26px);
-      font-weight: 500;
-      line-height: 1.5;
-      letter-spacing: -0.01em;
-      margin-bottom: 28px;
-    }
-    .about-inline-quote em {
-      font-style: normal;
-      color: var(--indigo);
-    }
-    .about-inline-body p {
-      font-size: clamp(15px, 1.3vw, 17px);
-      line-height: 1.75;
-      color: var(--text-mid);
-      margin-bottom: 12px;
-    }
-    .about-inline-body p:last-child { margin-bottom: 0; }
-    .about-inline-body strong { color: var(--text); font-weight: 600; }
-    .about-photo-col {
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-      align-items: flex-start;
-    }
-    .about-photo-wrap-inline {
-      width: 100%;
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      aspect-ratio: 4/3;
-      background: var(--indigo-dim);
-      display: flex; align-items: center; justify-content: center;
-      color: var(--text-muted); font-size: 13px;
-    }
-    .about-photo-wrap-inline img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      border-radius: var(--radius-lg);
-      transition: transform 0.6s var(--ease-out);
-    }
-    .about-photo-wrap-inline:hover img { transform: scale(1.03); }
-
-    /* ── Testimonials grid ──────────────────────────────── */
-    .testimonials-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      width: 100%;
-    }
-    @media (max-width: 768px) {
-      .contact-inline-inner { grid-template-columns: 1fr; gap: 48px; }
-      .about-inline-grid    { grid-template-columns: 1fr; gap: 40px; }
-      .testimonials-grid    { grid-template-columns: 1fr; }
-    }
-  </style>
+  <link rel="stylesheet" href="assets/css/home.css">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicon-180.png">
@@ -296,6 +50,7 @@
           <a href="#work"    class="nav-link">work</a>
           <a href="#about"   class="nav-link">about</a>
           <a href="#contact" class="nav-link">contact</a>
+          <a href="/Yuki_Regina_Nakamura_CV.pdf" download class="nav-link">CV</a>
         </div>
       </div>
     </div>
@@ -324,7 +79,7 @@
         </h1>
 
         <p class="hero-sub hero-fade">
-          I find what no one named yet. Then I design from there.
+          I find what no one has named yet. Then I design from there.
         </p>
 
         <div class="hero-actions hero-fade">
@@ -416,7 +171,7 @@
               <span class="project-type">UX Research · Service Design</span>
             </div>
             <h3 class="project-title">Transactional Journey</h3>
-            <p class="project-synopsis">End-to-end research across 6 teams and 12 systems. The problem everyone assumed it was. Wasn't. Two insights I identified became the leading brief for the next cycle.</p>
+            <p class="project-synopsis">End-to-end research across 6 teams and 12 systems. The problem everyone assumed? It wasn't. Two insights I identified became the leading brief for the next cycle.</p>
             <div class="project-arrow" aria-hidden="true">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                 <path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
@@ -454,23 +209,23 @@
           <div class="about-photo-wrap-inline reveal delay-2">
             <img src="assets/images/yuki-photo.jpg" alt="Yuki Regina">
           </div>
-          <!-- Testimonials — 2 side by side -->
-          <div class="testimonials-grid">
-            <div class="testimonial-card reveal delay-3">
-              <img src="assets/images/marina-photo.jpg" alt="Marina Ferreira Mendez" style="width:40px;height:40px;border-radius:50%;object-fit:cover;flex-shrink:0;">
-              <p class="testi-text">"Yuki has an exceptional ability to transform complex strategies into tangible solutions, bridging business needs with impeccable design — from Product Discovery and ROI definition to delivering high-value digital products from scratch."</p>
-              <p class="testi-name">Marina Ferreira Mendez</p>
-              <p class="testi-role">Group Product Manager · B2B Platform</p>
-            </div>
-            <div class="testimonial-card reveal delay-3">
-              <img src="assets/images/caio-photo.jpg" alt="Caio Prado Ferraz" style="width:40px;height:40px;border-radius:50%;object-fit:cover;flex-shrink:0;">
-              <p class="testi-text">"Yuki is results-focused and uses business objectives to drive smart design decisions. Her objectivity is her greatest strength — she works with agility while designing intentional experiences. Excellent team relationships and ideas that push beyond conventional approaches."</p>
-              <p class="testi-name">Caio Prado Ferraz</p>
-              <p class="testi-role">Design Lead · UOL</p>
-            </div>
-          </div>
         </div>
 
+      </div>
+
+      <div class="about-testimonials">
+        <div class="testimonial-card reveal delay-3">
+          <img src="assets/images/marina-photo.jpg" alt="Marina Ferreira Mendez" style="width:40px;height:40px;border-radius:50%;object-fit:cover;flex-shrink:0;">
+          <p class="testi-text">"Yuki has an exceptional ability to transform complex strategies into tangible solutions, bridging business needs with impeccable design — from Product Discovery and ROI definition to delivering high-value digital products from scratch."</p>
+          <p class="testi-name">Marina Ferreira Mendez</p>
+          <p class="testi-role">Group Product Manager · B2B Platform</p>
+        </div>
+        <div class="testimonial-card reveal delay-3">
+          <img src="assets/images/caio-photo.jpg" alt="Caio Prado Ferraz" style="width:40px;height:40px;border-radius:50%;object-fit:cover;flex-shrink:0;">
+          <p class="testi-text">"Yuki is results-focused and uses business objectives to drive smart design decisions. Her objectivity is her greatest strength — she works with agility while designing intentional experiences. Excellent team relationships and ideas that push beyond conventional approaches."</p>
+          <p class="testi-name">Caio Prado Ferraz</p>
+          <p class="testi-role">Design Lead · UOL</p>
+        </div>
       </div>
     </div>
   </section>
@@ -545,6 +300,24 @@
             </svg>
           </a>
 
+          <a href="/Yuki_Regina_Nakamura_CV.pdf" download class="contact-inline-link">
+            <div class="contact-inline-link-left">
+              <div class="contact-inline-icon">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <path d="M8 1.5v8M8 9.5L5 6.5M8 9.5l3-3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M2.5 11.5v1a1.5 1.5 0 0 0 1.5 1.5h8a1.5 1.5 0 0 0 1.5-1.5v-1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div>
+                <span class="contact-inline-label">cv</span>
+                <span class="contact-inline-value">Download PDF</span>
+              </div>
+            </div>
+            <svg class="contact-inline-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+
         </div>
       </div>
     </div>
@@ -560,258 +333,13 @@
           <a href="#contact" class="footer-link">contact</a>
         </div>
         <p class="footer-copy">© 2026 Yuki Regina</p>
-        <p class="footer-copy" style="margin-top:6px;font-size:11px;opacity:.45;">This portfolio was designed and coded with Claude</p>
+        <p class="footer-copy" style="margin-top:6px;font-size:11px;opacity:.45;">Designed by Yuki Regina. Coded with Claude.</p>
       </div>
     </div>
   </footer>
 
   <script src="assets/js/main.js"></script>
-  <script>
-  /* ── Time-of-day canvas atmosphere ──────────────────── */
-  (function() {
-    const canvas   = document.getElementById('hero-canvas');
-    const ctx      = canvas.getContext('2d');
-    const greeting = document.getElementById('time-greeting');
-
-    const themes = {
-      dawn:      { orbs: ['#FFDAB8','#FFC8C0','#D4C8E8','#C8D8F0'], op: 0.30, label: 'Good morning'  },
-      morning:   { orbs: ['#FFE8B0','#FFD8A0','#C8E4F8','#E4F0C4'], op: 0.24, label: 'Good morning'  },
-      midday:    { orbs: ['#D0E8FF','#D8F0F8','#F0F8D0','#FFF8C4'], op: 0.20, label: 'Good afternoon' },
-      afternoon: { orbs: ['#FFD4A4','#F8D0C8','#D0D8F4','#E8D8F0'], op: 0.26, label: 'Good afternoon' },
-      dusk:      { orbs: ['#FF9C6C','#FFBCA0','#8888CC','#C08898'], op: 0.30, label: 'Good evening'   },
-      evening:   { orbs: ['#6458B8','#8060A4','#A07880','#5060A8'], op: 0.36, label: 'Good evening'   },
-      night:     { orbs: ['#3428A0','#483880','#243090','#1E3080'], op: 0.42, label: 'Good night'     }
-    };
-
-    function getKey() {
-      const h = new Date().getHours();
-      if (h >= 4  && h < 7)  return 'dawn';
-      if (h >= 7  && h < 12) return 'morning';
-      if (h >= 12 && h < 14) return 'midday';
-      if (h >= 14 && h < 18) return 'afternoon';
-      if (h >= 18 && h < 21) return 'dusk';
-      if (h >= 21)            return 'evening';
-      return 'night';
-    }
-
-    const key   = getKey();
-    const theme = themes[key];
-
-    if (greeting) {
-      greeting.textContent = theme.label;
-      setTimeout(() => greeting.classList.add('visible'), 950);
-    }
-
-    let orbs = [];
-
-    function resize() {
-      canvas.width  = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
-    }
-
-    function initOrbs() {
-      orbs = theme.orbs.map((color, i) => ({
-        x:     (canvas.width  / theme.orbs.length) * i + canvas.width  / (theme.orbs.length * 2),
-        y:     canvas.height * (0.2 + (i % 2) * 0.5),
-        r:     canvas.width  * (0.22 + (i % 3) * 0.08),
-        vx:    (Math.random() - 0.5) * 0.32,
-        vy:    (Math.random() - 0.5) * 0.22,
-        color,
-        phase: Math.random() * Math.PI * 2
-      }));
-    }
-
-    function hexToRgb(hex) {
-      return `${parseInt(hex.slice(1,3),16)},${parseInt(hex.slice(3,5),16)},${parseInt(hex.slice(5,7),16)}`;
-    }
-
-    let frame = 0;
-    function draw() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      frame++;
-      orbs.forEach(orb => {
-        orb.x += orb.vx + Math.sin(frame * 0.007 + orb.phase) * 0.38;
-        orb.y += orb.vy + Math.cos(frame * 0.005 + orb.phase) * 0.28;
-        if (orb.x < -orb.r)                orb.x = canvas.width  + orb.r;
-        if (orb.x > canvas.width  + orb.r) orb.x = -orb.r;
-        if (orb.y < -orb.r)                orb.y = canvas.height + orb.r;
-        if (orb.y > canvas.height + orb.r) orb.y = -orb.r;
-        const g = ctx.createRadialGradient(orb.x, orb.y, 0, orb.x, orb.y, orb.r);
-        g.addColorStop(0,   `rgba(${hexToRgb(orb.color)}, ${theme.op})`);
-        g.addColorStop(0.5, `rgba(${hexToRgb(orb.color)}, ${theme.op * 0.4})`);
-        g.addColorStop(1,   `rgba(${hexToRgb(orb.color)}, 0)`);
-        ctx.beginPath();
-        ctx.arc(orb.x, orb.y, orb.r, 0, Math.PI * 2);
-        ctx.fillStyle = g;
-        ctx.fill();
-      });
-      requestAnimationFrame(draw);
-    }
-
-    requestAnimationFrame(() => { resize(); initOrbs(); draw(); });
-    setTimeout(() => canvas.classList.add('loaded'), 300);
-
-    let resizeTimer;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(() => { resize(); initOrbs(); }, 150);
-    });
-  })();
-
-  /* ── Aurora right — fade in ──────────────────────────── */
-  setTimeout(() => {
-    const aurora = document.getElementById('aurora-right');
-    if (aurora) aurora.classList.add('loaded');
-  }, 400);
-
-  /* ── Japanese characters + click ripples ────────────── */
-  (function() {
-    const fx  = document.getElementById('hero-fx');
-    if (!fx) return;
-    const ctx = fx.getContext('2d');
-
-    // レジーナユキ weighted ×6 — her name drifts through the rain
-    const JP = 'レレレレレレジジジジジジーーーーーーナナナナナナユユユユユユキキキキキキ雪雪雪あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよわをんアイウエオカキクケコサシスセソタチツテトハヒフヘホマミムメモヤユヨラリルレロ夢空花心時光道形美';
-
-    let cols = [];
-    const GAP = 34, FS = 18;
-
-    function initCols() {
-      cols = [];
-      const count = Math.floor(fx.width / GAP);
-      for (let i = 0; i < count; i++) {
-        cols.push({
-          x:    i * GAP + GAP / 2,
-          y:    Math.random() * -fx.height,
-          spd:  0.35 + Math.random() * 0.5,
-          op:   0.055 + Math.random() * 0.045,
-          ch:   JP[Math.floor(Math.random() * JP.length)],
-          tick: 0,
-          int:  50 + Math.floor(Math.random() * 90)
-        });
-      }
-    }
-
-    function resize() {
-      fx.width  = fx.offsetWidth;
-      fx.height = fx.offsetHeight;
-      initCols();
-    }
-
-    // Ripples
-    const ripples = [];
-    const heroEl = fx.closest('.hero') || document.querySelector('.hero');
-    heroEl.addEventListener('click', e => {
-      const r = fx.getBoundingClientRect();
-      ripples.push({ x: e.clientX - r.left, y: e.clientY - r.top, rad: 0, max: 70 + Math.random() * 30 });
-      ripples.push({ x: e.clientX - r.left, y: e.clientY - r.top, rad: 0, max: 40 + Math.random() * 20, delay: 8 });
-    });
-
-    function draw() {
-      ctx.clearRect(0, 0, fx.width, fx.height);
-      ctx.font = `${FS}px serif`;
-
-      // Falling characters
-      for (const col of cols) {
-        col.y   += col.spd;
-        col.tick++;
-        if (col.tick >= col.int) { col.ch = JP[Math.floor(Math.random() * JP.length)]; col.tick = 0; }
-        if (col.y > fx.height + FS) { col.y = -FS * 2; }
-        ctx.globalAlpha = col.op;
-        ctx.fillStyle = '#015FA6';
-        ctx.fillText(col.ch, col.x, col.y);
-      }
-
-      // Ripples
-      for (let i = ripples.length - 1; i >= 0; i--) {
-        const rip = ripples[i];
-        if (rip.delay && rip.delay-- > 0) continue;
-        rip.rad += 1.2;
-        const prog  = rip.rad / rip.max;
-        const alpha = (1 - prog) * 0.18;
-        if (alpha <= 0.005) { ripples.splice(i, 1); continue; }
-        ctx.globalAlpha = alpha;
-        ctx.strokeStyle = '#015FA6';
-        ctx.lineWidth   = 0.7;
-        ctx.beginPath();
-        ctx.arc(rip.x, rip.y, rip.rad, 0, Math.PI * 2);
-        ctx.stroke();
-      }
-
-      ctx.globalAlpha = 1;
-      requestAnimationFrame(draw);
-    }
-
-    function init() {
-      resize();
-      if (fx.width === 0 || fx.height === 0) {
-        setTimeout(init, 100); // retry if layout not ready
-        return;
-      }
-      draw();
-    }
-    setTimeout(init, 50);
-    window.addEventListener('resize', () => resize());
-  })();
-
-  /* ── Hero reveal — fire on load ─────────────────────── */
-  (function() {
-    // Headline lines slide up
-    const lines = document.querySelectorAll('.reveal-line');
-    lines.forEach((line, i) => {
-      setTimeout(() => line.classList.add('animated'), 200 + i * 100);
-    });
-
-    // Kicker, badge, sub, actions fade in
-    const fades = document.querySelectorAll('.hero-fade');
-    fades.forEach((el, i) => {
-      setTimeout(() => el.classList.add('visible'), 350 + i * 120);
-    });
-  })();
-
-  /* ── Scroll reveal — sections below fold ─────────────── */
-  (function() {
-    const reveals = document.querySelectorAll('.reveal, .reveal-scale');
-    if (!reveals.length) return;
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('revealed');
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
-    reveals.forEach(el => io.observe(el));
-  })();
-
-  /* ── Anchor nav — highlight active section on scroll ── */
-  (function() {
-    const sections = ['work', 'about', 'contact'];
-    const links    = document.querySelectorAll('.nav-link, .footer-link');
-    const visible  = new Set();
-
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          visible.add(entry.target.id);
-        } else {
-          visible.delete(entry.target.id);
-        }
-      });
-      // Pick the topmost visible section; if none (hero area), clear all
-      const activeId = sections.find(id => visible.has(id)) || null;
-      links.forEach(l => {
-        l.classList.toggle('active', activeId !== null && l.getAttribute('href') === '#' + activeId);
-      });
-    }, { threshold: 0.25 });
-
-    sections.forEach(id => {
-      const el = document.getElementById(id);
-      if (el) io.observe(el);
-    });
-  })();
-
-  </script>
+  <script src="assets/js/hero.js"></script>
 
 
 </body>
