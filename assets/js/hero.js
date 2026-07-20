@@ -5,7 +5,6 @@
 
 (function () {
   const canvas   = document.getElementById('hero-canvas');
-  const greeting = document.getElementById('time-greeting');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   if (!canvas) return;
@@ -34,8 +33,6 @@
   }
 
   const theme = themes[getKey()];
-
-  if (greeting) greeting.textContent = theme.label;
 
   let orbs = [];
 

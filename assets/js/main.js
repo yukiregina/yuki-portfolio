@@ -1,6 +1,5 @@
 /* ============================================================
    YUKI REGINA — Interactions
-   01. Custom cursor (lag + expand)
    02. Nav scroll state + progress bar
    03. Hero headline mask reveal
    04. Scroll-triggered fade/scale reveals
@@ -13,54 +12,6 @@
    ============================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
-
-  /* ── 01. Custom Cursor ─────────────────────────────────── */
-  const ring = document.querySelector('.cursor-ring');
-  const dot  = document.querySelector('.cursor-dot');
-
-  if (ring && dot) {
-    let mx = 0, my = 0;   // mouse position
-    let rx = 0, ry = 0;   // ring position (lagged)
-    const speed = 0.11;
-    let cursorActive = !document.hidden;
-
-    document.addEventListener('mousemove', e => {
-      mx = e.clientX;
-      my = e.clientY;
-      // Dot follows instantly
-      dot.style.left = mx + 'px';
-      dot.style.top  = my + 'px';
-    });
-
-    document.addEventListener('visibilitychange', () => {
-      cursorActive = !document.hidden;
-    });
-
-    (function animRing() {
-      if (cursorActive) {
-        rx += (mx - rx) * speed;
-        ry += (my - ry) * speed;
-        ring.style.left = rx + 'px';
-        ring.style.top  = ry + 'px';
-      }
-      requestAnimationFrame(animRing);
-    })();
-
-    // Expand ring on interactive elements
-    const hoverTargets = document.querySelectorAll(
-      'a, button, .project-card, .project-row, .testimonial-card, .contact-item, .before-card'
-    );
-    hoverTargets.forEach(el => {
-      el.addEventListener('mouseenter', () => ring.classList.add('hovered'));
-      el.addEventListener('mouseleave', () => ring.classList.remove('hovered'));
-    });
-
-    document.addEventListener('mousedown', () => ring.classList.add('clicking'));
-    document.addEventListener('mouseup',   () => ring.classList.remove('clicking'));
-    document.addEventListener('mouseleave', () => document.body.classList.add('cursor-hidden'));
-    document.addEventListener('mouseenter', () => document.body.classList.remove('cursor-hidden'));
-  }
-
 
   /* ── 02. Nav scroll state + progress bar ──────────────── */
   const nav         = document.querySelector('.nav');
@@ -124,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
             io.unobserve(entry.target);
           }
         });
-      }, { threshold: 0, rootMargin: '0px 0px -20% 0px' });
+      }, { threshold: 0.2 });
 
       revealEls.forEach(el => {
         if (!el.classList.contains('revealed')) io.observe(el);
