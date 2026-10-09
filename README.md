@@ -1,6 +1,6 @@
 # Yuki Regina — Portfolio
 
-Personal portfolio for **Yuki Regina**, Senior Product Designer.
+Personal portfolio for **Yuki Regina**, Independent Product Designer.
 
 Live at [yukiregina.com.br](https://yukiregina.com.br)
 
