@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-8YPXFBT22R"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-8YPXFBT22R');
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google" content="notranslate">
+  <meta http-equiv="Content-Language" content="en">
+  <meta name="description" content="ROI Calculator | Case study by Yuki Regina. An industrial equipment company's calculator showed a loss instead of savings. Same math, sign fixed.">
+  <title>ROI Calculator | Yuki Regina</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,400..700,0..100,0..1&family=Montserrat:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <style>
+    /* ── Stat row: longer values than the other cases ─────── */
+    .case-stat-bar-item { padding: 0 20px; }
+    .case-stat-bar-num { font-size: clamp(26px, 2.4vw, 34px); white-space: nowrap; }
+
+    /* ── Recreated old result field ─────────────────────────── */
+    .roi-oldfield {
+      margin-top: 28px;
+      background: #FBFBFB;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 32px clamp(20px, 4vw, 40px);
+      font-family: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    }
+    .roi-oldfield-lbl { font-size: 15px; color: #6B6B6B; margin-bottom: 8px; }
+    .roi-oldfield-box {
+      background: #FFFFFF;
+      border: 1px solid #E2E2E2;
+      padding: 12px 14px;
+      font-size: 16px;
+      color: #C0392B;
+      max-width: 560px;
+    }
+
+    /* ── Screenshot pairs ───────────────────────────────────── */
+    .roi-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 36px 0 0;
+      align-items: start;
+    }
+    .roi-pair .case-img-block { margin: 0; }
+    .roi-pair.is-phones { grid-template-columns: repeat(2, minmax(0, 220px)); justify-content: center; margin-top: 16px; }
+    .roi-note {
+      font-size: 11px !important;
+      color: var(--text-muted) !important;
+      margin: 10px 0 0 !important;
+      letter-spacing: 0.02em;
+    }
+    .roi-cap {
+      font-size: 13px !important;
+      color: var(--text-muted) !important;
+      margin: 8px 0 0 !important;
+    }
+
+    /* ── Journey: four cards ────────────────────────────────── */
+    .roi-journey {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 32px;
+    }
+    .roi-step {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 22px 20px;
+      position: relative;
+    }
+    .roi-step-num {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.1em; color: var(--indigo);
+      margin-bottom: 10px;
+    }
+    .roi-step-title { font-weight: 600; font-size: 15px; color: var(--text); margin-bottom: 6px; }
+    .roi-step-desc { font-size: 13px; color: var(--text-muted); line-height: 1.55; }
+    .roi-step.is-lost { background: #181818; border-color: #181818; }
+    .roi-step.is-lost .roi-step-num { color: #4A90E2; }
+    .roi-step.is-lost .roi-step-title { color: var(--white); }
+    .roi-step.is-lost .roi-step-desc { color: rgba(255,255,255,0.62); }
+    .roi-lost-tag {
+      display: inline-block;
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: #181818; background: #E9E4DB;
+      border-radius: 999px; padding: 4px 10px;
+      margin-bottom: 12px;
+    }
+
+    /* ── Funnel ─────────────────────────────────────────────── */
+    .roi-funnel {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 28px;
+      margin-top: 32px;
+    }
+    .roi-funnel-row { display: grid; grid-template-columns: 150px 1fr; gap: 16px; align-items: center; }
+    .roi-funnel-row + .roi-funnel-row { margin-top: 10px; }
+    .roi-funnel-lbl { font-size: 13px; font-weight: 600; color: var(--text); }
+    .roi-funnel-track { position: relative; height: 36px; }
+    .roi-funnel-bar {
+      height: 100%;
+      background: var(--indigo);
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: flex-end;
+      padding: 0 12px;
+      color: var(--white);
+      font-family: var(--font-alt);
+      font-weight: 700; font-size: 18px;
+      min-width: 44px;
+    }
+    .roi-funnel-drop {
+      margin: 10px 0 10px 166px;
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 12px; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--white); background: #181818;
+      border-radius: 999px; padding: 6px 12px;
+    }
+    .roi-order { margin-top: 28px; display: flex; flex-direction: column; gap: 14px; }
+    .roi-order-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .roi-order-lbl {
+      flex: 0 0 150px;
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .roi-box {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 13px; font-weight: 600; color: var(--text);
+    }
+    .roi-box.is-result { border-color: var(--indigo); color: var(--indigo); background: var(--indigo-dimmer); }
+    .roi-arrow { color: var(--text-muted); font-size: 14px; }
+
+    /* ── Capture · Organize · Follow up ─────────────────────── */
+    .roi-trio {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 32px;
+    }
+    .roi-trio-card {
+      background: var(--indigo);
+      border-radius: var(--radius-md);
+      padding: 26px 22px;
+      color: var(--white);
+    }
+    .roi-trio-num { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; color: rgba(255,255,255,0.6); margin-bottom: 10px; }
+    .roi-trio-title { font-family: var(--font-alt); font-size: 22px; font-weight: 700; margin-bottom: 8px; }
+    .roi-trio-desc { font-size: 14px; line-height: 1.55; color: rgba(255,255,255,0.8); }
+    .roi-proposed { margin-top: 20px !important; }
+
+    /* ── Closing line ───────────────────────────────────────── */
+    .case-body .roi-closing {
+      font-family: var(--font-alt);
+      font-size: clamp(30px, 5vw, 56px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.12;
+      color: var(--text);
+      max-width: 14em;
+      margin: 0 0 clamp(48px, 7vw, 80px);
+    }
+
+    @media (max-width: 900px) {
+      .roi-journey { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .roi-pair:not(.is-phones) { grid-template-columns: 1fr; }
+      .roi-journey, .roi-trio { grid-template-columns: 1fr; }
+      .roi-funnel { padding: 20px; }
+      .roi-funnel-row { grid-template-columns: 1fr; gap: 6px; }
+      .roi-funnel-drop { margin-left: 0; }
+      .roi-order-lbl { flex-basis: 100%; }
+    }
+  </style>
+  <link rel="icon" type="image/x-icon" href="../favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/favicon-180.png">
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="scroll-progress"></div>
+    <div class="container">
+      <div class="nav-inner">
+        <a href="../index.html" class="nav-logo">
+          Yuki Regina
+          <img class="nav-logo-mark" src="../assets/images/logo-mark.svg" alt="" aria-hidden="true">
+        </a>
+        <div class="nav-links">
+          <a href="../index.html#work"    class="nav-link">work</a>
+          <a href="../index.html#about"   class="nav-link">about</a>
+          <a href="../index.html#contact" class="nav-link">contact</a>
+          <a href="/Yuki_Regina_Nakamura_CV.pdf" download class="nav-link">CV</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── Hero ──────────────────────────────────────────────── -->
+  <div class="case-hero">
+    <div class="container">
+      <div class="case-hero-grid">
+        <div>
+          <div class="case-meta reveal">
+            <div class="case-meta-item">
+              <p class="case-meta-lbl">Year</p>
+              <p class="case-meta-val">2026</p>
+            </div>
+            <div class="case-meta-item">
+              <p class="case-meta-lbl">Role</p>
+              <p class="case-meta-val">Product Design, independent</p>
+            </div>
+            <div class="case-meta-item">
+              <p class="case-meta-lbl">Industry</p>
+              <p class="case-meta-val">Industrial equipment · B2B</p>
+            </div>
+          </div>
+          <h1 class="case-title reveal">ROI Calculator</h1>
+          <p class="case-lead reveal">
+            An industrial equipment company's ROI calculator showed a prospect R$ −1,108,800 in savings. The math was right. The sign was inverted.
+          </p>
+          <div class="case-brief-diff reveal">
+            <p class="case-brief-handed">The brief I was handed: rebuild the calculator.</p>
+            <p class="case-brief-shipped">The brief I shipped: the quote flow they built next.</p>
+          </div>
+          <div class="case-stat-bar reveal" style="padding:32px 0;margin:32px 0 0;">
+            <div class="case-stat-bar-item">
+              <p class="case-stat-bar-num">−R$1.1M →<br>+R$1.1M</p>
+              <p class="case-stat-bar-lbl">same math, sign fixed</p>
+            </div>
+            <div class="case-stat-bar-item">
+              <p class="case-stat-bar-num">15 of 27</p>
+              <p class="case-stat-bar-lbl">left on the first screen</p>
+            </div>
+            <div class="case-stat-bar-item">
+              <p class="case-stat-bar-num">4 → 3 → 2</p>
+              <p class="case-stat-bar-lbl">steps to the result</p>
+            </div>
+          </div>
+        </div>
+        <div class="case-cover-card reveal delay-2">
+          <img src="../assets/images/roi-cover.webp" alt="ROI Calculator cover: the current calculator's result on a phone, next to a card showing the old figure, R$ −1.108.800" width="1200" height="750">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="case-body">
+    <div class="container">
+
+      <div class="case-section reveal">
+        <p class="case-s-label">The Problem</p>
+        <h2 class="case-s-title">The tool was arguing against the sale.</h2>
+        <p>The calculator existed to show savings. It showed a loss. Nobody had caught it, because nobody was measuring it.</p>
+      </div>
+
+      <div class="case-section reveal">
+        <p class="case-s-label">Before</p>
+        <h2 class="case-s-title">Before: the answer at the bottom of the page.</h2>
+        <div class="roi-pair">
+          <div class="case-img-block">
+            <img src="../assets/images/roi-before-form.webp" alt="Original calculator: five empty input fields and a Calculate button" loading="lazy" width="1600" height="1320">
+          </div>
+          <div class="case-img-block">
+            <img src="../assets/images/roi-before-results.webp" alt="Original calculator: output fields further down the page, ending with total cost savings" loading="lazy" width="1600" height="980">
+          </div>
+        </div>
+        <p class="roi-note">Original interface in Portuguese.</p>
+        <p class="roi-cap">Five inputs, a Calculate button, then twelve output fields. The savings figure came last, and came out negative.</p>
+        <div class="roi-oldfield" role="img" aria-label="Recreated result field: Economia total de custos, R$ −1.108.800 in red">
+          <div class="roi-oldfield-lbl">Economia total de custos:</div>
+          <div class="roi-oldfield-box">R$ −1.108.800</div>
+        </div>
+        <p class="roi-cap">Recreated from the diagnosis. The figure the old calculator showed.</p>
+      </div>
+
+      <div class="case-section reveal">
+        <p class="case-s-label">Discovery</p>
+        <h2 class="case-s-title">Where the lead gets lost.</h2>
+        <p>Before building, I mapped how a maintenance engineer decides, and audited the existing site: 39 plugins, duplicated functions, no backups. The lead was lost at the moment someone wanted a quote. Nothing caught them.</p>
+        <div class="roi-journey">
+          <div class="roi-step">
+            <div class="roi-step-num">01</div>
+            <div class="roi-step-title">Searches Google</div>
+            <div class="roi-step-desc">A technical problem.</div>
+          </div>
+          <div class="roi-step">
+            <div class="roi-step-num">02</div>
+            <div class="roi-step-title">Evaluates</div>
+            <div class="roi-step-desc">Reads the blog, runs the calculator.</div>
+          </div>
+          <div class="roi-step is-lost">
+            <span class="roi-lost-tag">Lost here</span>
+            <div class="roi-step-num">03</div>
+            <div class="roi-step-title">Asks for a quote</div>
+          </div>
+          <div class="roi-step">
+            <div class="roi-step-num">04</div>
+            <div class="roi-step-title">Decides and refers</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="case-section reveal">
+        <p class="case-s-label">Iteration</p>
+        <h2 class="case-s-title">Measure first. Then cut.</h2>
+        <p>The first version opened with a sector picker, so results could start from typical values. In the first review, we cut it. Every extra choice was one more reason to leave before seeing the number.</p>
+        <div class="roi-pair">
+          <div class="case-img-block">
+            <img src="../assets/images/roi-v1-sector.webp" alt="First version, step 1 of 4: a grid of industry sectors to pick from" loading="lazy" width="1600" height="916">
+          </div>
+          <div class="case-img-block">
+            <img src="../assets/images/roi-v1-costs.webp" alt="First version, step 3 of 4: cost inputs with sliders next to a live estimated result" loading="lazy" width="1600" height="1040">
+          </div>
+        </div>
+        <p class="roi-cap">First version: four steps, starting with the sector.</p>
+
+        <p style="margin-top:40px;">Then I measured. Of the first 27 people who opened it, 15 left on the first screen, before seeing any number. On mobile, 10 of 15. So I moved the result up front and the form after. Three steps became two.</p>
+
+        <div class="roi-funnel" role="img" aria-label="Funnel: 27 opened, 12 finished step 1, 7 finished step 2. 15 left on the first screen.">
+          <div class="roi-funnel-row">
+            <div class="roi-funnel-lbl">Opened</div>
+            <div class="roi-funnel-track"><div class="roi-funnel-bar" style="width:100%;">27</div></div>
+          </div>
+          <span class="roi-funnel-drop">15 left here</span>
+          <div class="roi-funnel-row">
+            <div class="roi-funnel-lbl">Finished step 1</div>
+            <div class="roi-funnel-track"><div class="roi-funnel-bar" style="width:44.4%;">12</div></div>
+          </div>
+          <div class="roi-funnel-row">
+            <div class="roi-funnel-lbl">Finished step 2</div>
+            <div class="roi-funnel-track"><div class="roi-funnel-bar" style="width:25.9%;">7</div></div>
+          </div>
+        </div>
+        <p class="roi-cap">First weeks live. Small sample, real numbers.</p>
+
+        <div class="roi-order">
+          <div class="roi-order-row">
+            <span class="roi-order-lbl">Old order · 3 steps</span>
+            <span class="roi-box">Operation</span><span class="roi-arrow">→</span>
+            <span class="roi-box">Costs</span><span class="roi-arrow">→</span>
+            <span class="roi-box is-result">Result</span>
+          </div>
+          <div class="roi-order-row">
+            <span class="roi-order-lbl">New order · 2 steps</span>
+            <span class="roi-box is-result">Inputs + live result</span><span class="roi-arrow">→</span>
+            <span class="roi-box">Form</span>
+          </div>
+        </div>
+
+        <div class="roi-pair" style="margin-top:40px;">
+          <div class="case-img-block">
+            <img src="../assets/images/roi-now-step1-desktop.webp" alt="Current calculator, step 1: inputs on the left, estimated annual savings updating live on the right" loading="lazy" width="1140" height="775">
+          </div>
+          <div class="case-img-block">
+            <img src="../assets/images/roi-now-step2-desktop.webp" alt="Current calculator, step 2: the savings stay visible next to a short contact form" loading="lazy" width="1140" height="720">
+          </div>
+        </div>
+        <div class="roi-pair is-phones">
+          <div class="case-img-block">
+            <img src="../assets/images/roi-now-step1-mobile.webp" alt="Current calculator on mobile, step 1, with the savings pinned to the bottom of the screen" loading="lazy" width="677" height="1600">
+          </div>
+          <div class="case-img-block">
+            <img src="../assets/images/roi-now-step2-mobile.webp" alt="Current calculator on mobile, step 2: savings first, form below" loading="lazy" width="471" height="1600">
+          </div>
+        </div>
+        <p class="roi-cap">The calculator today: two steps, desktop and mobile. Brand removed, shown in grayscale.</p>
+      </div>
+
+      <div class="case-section reveal">
+        <p class="case-s-label">What Happened</p>
+        <h2 class="case-s-title">The page mattered more than the tool.</h2>
+        <p>The client moved the calculator off the homepage. Today it gets little traffic. Later, they rebuilt the site around a quote request, with another vendor.</p>
+      </div>
+
+      <div class="case-section reveal">
+        <p class="case-s-label">The Real Deliverable</p>
+        <h2 class="case-s-title">The brief that outlived the tool.</h2>
+        <div class="roi-trio">
+          <div class="roi-trio-card">
+            <div class="roi-trio-num">01</div>
+            <div class="roi-trio-title">Capture</div>
+            <div class="roi-trio-desc">The calculator and a catalog become entry points.</div>
+          </div>
+          <div class="roi-trio-card">
+            <div class="roi-trio-num">02</div>
+            <div class="roi-trio-title">Organize</div>
+            <div class="roi-trio-desc">One place for every lead.</div>
+          </div>
+          <div class="roi-trio-card">
+            <div class="roi-trio-num">03</div>
+            <div class="roi-trio-title">Follow up</div>
+            <div class="roi-trio-desc">Nothing depends on someone remembering.</div>
+          </div>
+        </div>
+        <p class="roi-proposed">Proposed: a catalog with a quote request on every product. That's what they built next.</p>
+      </div>
+
+      <p class="roi-closing reveal">I didn't build it. I wrote the brief for it.</p>
+
+      <div class="case-section reveal">
+        <p class="case-s-label">Key Learnings</p>
+        <h2 class="case-s-title">What this project taught me</h2>
+        <div class="case-learnings">
+          <ul>
+            <li>A tool nobody reaches measures the page, not the tool.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Case footer nav -->
+  <div class="container">
+    <div class="case-footer-nav">
+      <a href="../index.html#work" class="case-nav-link">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" style="transform:rotate(180deg)">
+          <path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        All work
+      </a>
+      <a href="ecommerce-platform.html" class="case-nav-link">
+        Next: E-commerce Platform
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-links">
+          <a href="../index.html#work"    class="footer-link">work</a>
+          <a href="../index.html#about"   class="footer-link">about</a>
+          <a href="../index.html#contact" class="footer-link">contact</a>
+        </div>
+        <p class="footer-copy">© 2026 Yuki Regina</p>
+        <p class="footer-copy" style="margin-top:6px;font-size:11px;opacity:.45;">Designed by Yuki Regina. Coded with Claude. Yes, I pushed to GitHub. As a designer.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

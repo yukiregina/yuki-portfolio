@@ -192,6 +192,8 @@
 }
 .about-inline-body p:last-child { margin-bottom: 0; }
 .about-inline-body strong { color: var(--text); font-weight: 600; }
+.about-inline-body a { color: inherit; text-decoration: underline; text-decoration-color: var(--indigo); text-decoration-thickness: 1px; text-underline-offset: 3px; transition: color .2s; }
+.about-inline-body a:hover { color: var(--indigo); }
 .about-photo-col {
   display: flex;
   flex-direction: column;
