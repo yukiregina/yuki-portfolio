@@ -178,12 +178,14 @@
       margin: 0 0 clamp(48px, 7vw, 80px);
     }
 
+    .roi-journey.is-five { grid-template-columns: repeat(5, 1fr); }
+
     @media (max-width: 900px) {
-      .roi-journey { grid-template-columns: 1fr 1fr; }
+      .roi-journey, .roi-journey.is-five { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 768px) {
       .roi-pair:not(.is-phones) { grid-template-columns: 1fr; }
-      .roi-journey, .roi-trio { grid-template-columns: 1fr; }
+      .roi-journey, .roi-journey.is-five, .roi-trio { grid-template-columns: 1fr; }
       .roi-funnel { padding: 20px; }
       .roi-funnel-row { grid-template-columns: 1fr; gap: 6px; }
       .roi-funnel-drop { margin-left: 0; }
@@ -235,7 +237,7 @@
           </div>
           <h1 class="case-title reveal">ROI Calculator</h1>
           <p class="case-lead reveal">
-            An industrial equipment company's ROI calculator showed a prospect R$ −1,108,800 in savings. The math was right. The sign was inverted.
+            An industrial equipment company's ROI calculator returned wrong numbers. In my test run, R$ −1,108,800 in savings. The math was right. The sign was inverted.
           </p>
           <div class="case-brief-diff reveal">
             <p class="case-brief-handed">The brief I was handed: rebuild the calculator.</p>
@@ -269,7 +271,7 @@
       <div class="case-section reveal">
         <p class="case-s-label">The Problem</p>
         <h2 class="case-s-title">The tool was arguing against the sale.</h2>
-        <p>The calculator existed to show savings. It showed a loss. Nobody had caught it, because nobody was measuring it.</p>
+        <p>The calculator existed to show savings. It showed wrong numbers, sometimes a loss. Sales knew it was broken. Nobody knew what it was costing them, because nothing was measured.</p>
       </div>
 
       <div class="case-section reveal">
@@ -293,9 +295,27 @@
       </div>
 
       <div class="case-section reveal">
-        <p class="case-s-label">Discovery</p>
-        <h2 class="case-s-title">Where the lead gets lost.</h2>
-        <p>Before building, I mapped how a maintenance engineer decides, and audited the existing site: 39 plugins, duplicated functions, no backups. The lead was lost at the moment someone wanted a quote. Nothing caught them.</p>
+        <p class="case-s-label">Diagnosis</p>
+        <h2 class="case-s-title">I audited the whole site, not just the tool.</h2>
+        <p>With access to their WordPress, I sent them what to fix. Two things came out of it: the calculator built outside WordPress, and analytics where there were none.</p>
+        <div class="case-stat-bar" style="padding:32px 0;margin:32px 0 0;">
+          <div class="case-stat-bar-item">
+            <p class="case-stat-bar-num">39</p>
+            <p class="case-stat-bar-lbl">plugins, functions duplicated</p>
+          </div>
+          <div class="case-stat-bar-item">
+            <p class="case-stat-bar-num">0</p>
+            <p class="case-stat-bar-lbl">backups</p>
+          </div>
+          <div class="case-stat-bar-item">
+            <p class="case-stat-bar-num">0</p>
+            <p class="case-stat-bar-lbl">pages with a search title</p>
+          </div>
+          <div class="case-stat-bar-item">
+            <p class="case-stat-bar-num">0</p>
+            <p class="case-stat-bar-lbl">events measured</p>
+          </div>
+        </div>
         <div class="roi-journey">
           <div class="roi-step">
             <div class="roi-step-num">01</div>
@@ -320,6 +340,58 @@
       </div>
 
       <div class="case-section reveal">
+        <p class="case-s-label">System</p>
+        <h2 class="case-s-title">Their brandbook, turned into tokens.</h2>
+        <p>Guideline values and my interface additions kept in separate layers, packaged as a Claude skill. The brand blue failed AA for small text, so a darker shade took over there.</p>
+        <div class="case-img-block" style="margin-top:32px;">
+          <img src="../assets/images/roi-system.webp" alt="Design system sheet: color, type, spacing and radius tokens" loading="lazy" width="3200" height="2000">
+        </div>
+        <p class="roi-cap">Guideline on the left, my extensions on the right.</p>
+      </div>
+
+      <div class="case-section reveal">
+        <p class="case-s-label">Build</p>
+        <h2 class="case-s-title">Flow first. Screens after.</h2>
+        <div class="roi-journey is-five">
+          <div class="roi-step">
+            <div class="roi-step-num">01</div>
+            <div class="roi-step-title">Flow</div>
+            <div class="roi-step-desc">Five versions in FigJam before any screen. The form stopped being a new screen and became part of the result.</div>
+          </div>
+          <div class="roi-step">
+            <div class="roi-step-num">02</div>
+            <div class="roi-step-title">Figma Make</div>
+            <div class="roi-step-desc">Exploration only.</div>
+          </div>
+          <div class="roi-step">
+            <div class="roi-step-num">03</div>
+            <div class="roi-step-title">Figma + Claude Code</div>
+            <div class="roi-step-desc">Built side by side through the Figma MCP. Result, form and inputs from Figma. Steps from code.</div>
+          </div>
+          <div class="roi-step">
+            <div class="roi-step-num">04</div>
+            <div class="roi-step-title">Zero monthly fee</div>
+            <div class="roi-step-desc">The client's rule. Netlify instead of Vercel, leads in a Google Sheet. No server, no database.</div>
+          </div>
+          <div class="roi-step">
+            <div class="roi-step-num">05</div>
+            <div class="roi-step-title">One account, theirs</div>
+            <div class="roi-step-desc">They run on Microsoft, so we created a Google account just for this. Sheet, GA4 and deploy in one place, independent of their host. Three step-by-step docs so they run it without me.</div>
+          </div>
+        </div>
+        <div class="case-img-block" style="margin-top:36px;">
+          <a href="../assets/images/roi-flow.webp" target="_blank" rel="noopener">
+            <img src="../assets/images/roi-flow.webp" alt="Five versions of the calculator flow side by side in FigJam, from entry point to quote request" loading="lazy" width="3952" height="2506">
+          </a>
+        </div>
+        <p class="roi-cap">Five versions of the flow, left to right. Click to open full size.</p>
+        <div class="case-img-block" style="margin-top:36px;">
+          <img src="../assets/images/roi-v2-figma.webp" alt="Figma version, step 3: contact form on the left, estimated savings and breakdown on the right" loading="lazy" width="2342" height="1620">
+        </div>
+        <p class="roi-cap">The Figma side. Its result panel and form made it into the final version.</p>
+      </div>
+
+      <div class="case-section reveal">
         <p class="case-s-label">Iteration</p>
         <h2 class="case-s-title">Measure first. Then cut.</h2>
         <p>The first version opened with a sector picker, so results could start from typical values. In the first review, we cut it. Every extra choice was one more reason to leave before seeing the number.</p>
@@ -333,7 +405,8 @@
         </div>
         <p class="roi-cap">First version: four steps, starting with the sector.</p>
 
-        <p style="margin-top:40px;">Then I measured. Of the first 27 people who opened it, 15 left on the first screen, before seeing any number. On mobile, 10 of 15. So I moved the result up front and the form after. Three steps became two.</p>
+        <p style="margin-top:40px;">The analytics from the diagnosis made this possible: GA4 through GTM, my own event names.</p>
+        <p>Then I measured. Of the first 27 people who opened it, 15 left on the first screen, before seeing any number. On mobile, 10 of 15. So I moved the result up front and the form after. Three steps became two.</p>
 
         <div class="roi-funnel" role="img" aria-label="Funnel: 27 opened, 12 finished step 1, 7 finished step 2. 15 left on the first screen.">
           <div class="roi-funnel-row">
@@ -388,7 +461,7 @@
       <div class="case-section reveal">
         <p class="case-s-label">What Happened</p>
         <h2 class="case-s-title">The page mattered more than the tool.</h2>
-        <p>The client moved the calculator off the homepage. Today it gets little traffic. Later, they rebuilt the site around a quote request, with another vendor.</p>
+        <p>The client moved the calculator off the homepage, into a Tools link next to another tool they built. Later they added a quote request to their WordPress site, with another vendor.</p>
       </div>
 
       <div class="case-section reveal">
@@ -411,20 +484,10 @@
             <div class="roi-trio-desc">Nothing depends on someone remembering.</div>
           </div>
         </div>
-        <p class="roi-proposed">Proposed: a catalog with a quote request on every product. That's what they built next.</p>
+        <p class="roi-proposed">Proposed: a catalog with a quote request on every product. A quote request is what they added next.</p>
       </div>
 
       <p class="roi-closing reveal">I didn't build it. I wrote the brief for it.</p>
-
-      <div class="case-section reveal">
-        <p class="case-s-label">Key Learnings</p>
-        <h2 class="case-s-title">What this project taught me</h2>
-        <div class="case-learnings">
-          <ul>
-            <li>A tool nobody reaches measures the page, not the tool.</li>
-          </ul>
-        </div>
-      </div>
 
     </div>
   </div>
