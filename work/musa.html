@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-8YPXFBT22R"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-8YPXFBT22R');
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google" content="notranslate">
+  <meta http-equiv="Content-Language" content="en">
+  <meta name="description" content="Musa | Case study by Yuki Regina. Employee #11 at a waste-management startup. Before any screen, I designed the map of the service. It went into the seed pitch. The app came after.">
+  <title>Musa | Yuki Regina</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,400..700,0..100,0..1&family=Montserrat:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <style>
+    /* ── Stat row: four items, full width under the hero ────── */
+    .case-stat-bar-item { padding: 0 20px; }
+    .case-stat-bar-num { font-size: clamp(28px, 3vw, 44px); white-space: nowrap; }
+
+    /* ── Cover: wide journey illustration, fill the card ────── */
+    .case-cover-card { padding: 0; background: var(--white); border: 1px solid var(--border); }
+    .case-cover-card img { width: 100%; height: 100%; max-height: none; border-radius: 0; object-fit: cover; object-position: center left; }
+
+    /* ── Captions ───────────────────────────────────────────── */
+    .musa-cap {
+      font-size: 13px !important;
+      color: var(--text-muted) !important;
+      margin: 8px 0 0 !important;
+    }
+
+    /* ── Three problems ─────────────────────────────────────── */
+    .musa-3up {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 28px;
+    }
+    .musa-3up .case-box h3 { display: flex; gap: 10px; }
+    .musa-3up .case-box h3 span { color: var(--indigo); }
+
+    /* ── Lists in running text ──────────────────────────────── */
+    .case-learnings { margin: 20px 0 24px; max-width: 680px; }
+    .case-learnings strong { color: var(--text); font-weight: 600; }
+
+    /* ── Image sizing ───────────────────────────────────────── */
+    .musa-strip { display: flex; }
+    .musa-strip .case-screen-item { flex: var(--ar) 1 0; background: var(--white); }
+
+    /* ── Photo rows: equal-height 3/4 tiles ─────────────────── */
+    .musa-row {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(0, 1fr);
+      gap: 12px;
+      margin-top: 36px;
+    }
+    .musa-row .case-img-block { margin: 0; aspect-ratio: 3 / 4; }
+    .musa-row img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+
+    /* ── Prototype videos ───────────────────────────────────── */
+    .musa-videos {
+      display: grid;
+      grid-template-columns: repeat(2, 260px);
+      justify-content: center;
+      gap: 24px;
+      margin-top: 40px;
+    }
+    .musa-videos figure { margin: 0; display: grid; grid-row: span 3; grid-template-rows: subgrid; row-gap: 0; }
+    .musa-videos .case-s-label { margin-bottom: 10px; align-self: end; }
+    .musa-videos .case-img-block { margin: 0; aspect-ratio: 282 / 608; }
+    .musa-videos video { width: 100%; height: 100%; display: block; object-fit: cover; }
+
+    /* ── Blueprint + Demo Day ───────────────────────────────── */
+    .musa-cap-mobile { display: none; }
+    .musa-demo { max-width: 560px; aspect-ratio: 4 / 3; margin-bottom: 0; }
+    .musa-demo img { width: 100%; height: 100%; object-fit: cover; object-position: center 35%; }
+    .case-img-block a { display: block; cursor: zoom-in; }
+
+    /* ── Alelo laptop mockup: no card, centered ─────────────── */
+    .musa-alelo { max-width: 640px; margin: 36px auto 0; }
+    .musa-alelo img { width: 100%; display: block; }
+    .case-body p.musa-alelo-cap { max-width: 640px; text-align: center; margin-left: auto !important; margin-right: auto !important; }
+
+    @media (max-width: 900px) {
+      .musa-3up { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .case-stat-bar-item { padding: 0 0 32px; }
+      .case-stat-bar-item:last-child { padding-bottom: 0; }
+      .musa-strip { flex-wrap: wrap; }
+      .musa-strip .case-screen-item { flex: 1 1 calc(50% - 8px); }
+      .musa-strip img { aspect-ratio: 1; object-fit: cover; }
+      .musa-row {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+      }
+      .musa-row .case-img-block { flex: 0 0 70%; scroll-snap-align: start; }
+      .musa-videos { grid-template-columns: repeat(2, 45%); gap: 16px; }
+      .musa-blueprint { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .musa-blueprint a { width: max-content; }
+      .musa-blueprint img { width: auto; max-width: none; height: 260px; }
+      .musa-cap-desktop { display: none; }
+      .musa-cap-mobile { display: inline; }
+      .musa-demo { max-width: none; }
+    }
+  </style>
+  <link rel="icon" type="image/x-icon" href="../favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/favicon-180.png">
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="scroll-progress"></div>
+    <div class="container">
+      <div class="nav-inner">
+        <a href="../index.html" class="nav-logo">
+          Yuki Regina
+          <img class="nav-logo-mark" src="../assets/images/logo-mark.svg" alt="" aria-hidden="true">
+        </a>
+        <div class="nav-links">
+          <a href="../index.html#work"    class="nav-link">work</a>
+          <a href="../index.html#about"   class="nav-link">about</a>
+          <a href="../index.html#contact" class="nav-link">contact</a>
+          <a href="/Yuki_Regina_Nakamura_CV.pdf" download class="nav-link">CV</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── Hero ──────────────────────────────────────────────── -->
+  <div class="case-hero">
+    <div class="container">
+      <div class="case-hero-grid">
+        <div>
+          <div class="case-meta reveal">
+            <div class="case-meta-item">
+              <p class="case-meta-lbl">Year</p>
+              <p class="case-meta-val">2020–2021</p>
+            </div>
+            <div class="case-meta-item">
+              <p class="case-meta-lbl">Role</p>
+              <p class="case-meta-val">Service Design · Product Design</p>
+            </div>
+          </div>
+          <h1 class="case-title reveal">Musa: the map before the app</h1>
+          <p class="case-lead reveal">
+            Joined as employee #11. Shipped the Transporter App MVP in 3 months. The service journey I designed supported the seed round, closed in under 12 months. Within 18 months, the operation reached 400+ clients, 3,000+ tons of waste collected and reused, 5+ transporter partners and 20+ drivers.
+          </p>
+        </div>
+        <div class="case-cover-card reveal delay-2">
+          <img src="../assets/images/musa/musa-journey.webp" alt="Musa service journey: an illustrated road connecting Generator, Transporter and Recycler, stage by stage, with the value each actor gets" width="1920" height="1080">
+        </div>
+      </div>
+      <div class="case-stat-bar reveal" style="padding:32px 0;margin:0;">
+        <div class="case-stat-bar-item">
+          <p class="case-stat-bar-num">3 months</p>
+          <p class="case-stat-bar-lbl">to ship the MVP</p>
+        </div>
+        <div class="case-stat-bar-item">
+          <p class="case-stat-bar-num">&lt;12 months</p>
+          <p class="case-stat-bar-lbl">to the seed round</p>
+        </div>
+        <div class="case-stat-bar-item">
+          <p class="case-stat-bar-num">400+</p>
+          <p class="case-stat-bar-lbl">clients in 18 months</p>
+        </div>
+        <div class="case-stat-bar-item">
+          <p class="case-stat-bar-num">3,000+ tons</p>
+          <p class="case-stat-bar-lbl">of waste collected and reused</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="case-body">
+    <div class="container">
+
+      <div class="case-section reveal">
+        <p class="case-s-label">Context</p>
+        <h2 class="case-s-title">Everything was still TBD</h2>
+        <p>Musa wanted a world without waste, where materials are recovered and reused instead of sent to landfill. When I joined, there was a mission and no product scope. Three actors had to work as one system:</p>
+        <div class="case-learnings">
+          <ul>
+            <li><span><strong>Generators:</strong> businesses producing waste</span></li>
+            <li><span><strong>Transporters:</strong> drivers and fleet partners collecting it</span></li>
+            <li><span><strong>Recyclers:</strong> facilities processing and reusing materials</span></li>
+          </ul>
+        </div>
+        <p>My role covered UX and service design, visual design, and product coordination between an external brand agency and a development studio.</p>
+      </div>
+
+      <div class="case-section reveal">
+        <p class="case-s-label">The Problem</p>
+        <h2 class="case-s-title">Three problems</h2>
+        <div class="musa-3up">
+          <div class="case-box">
+            <h3><span>1</span>No shared mental model.</h3>
+            <p>Everyone had a different answer to "how does it work?" That made it hard to pitch partners, sell to clients or prioritize anything.</p>
+          </div>
+          <div class="case-box">
+            <h3><span>2</span>The transporter side was fragile.</h3>
+            <p>Drivers work under time, routes, paperwork, connectivity and safety constraints. Collection is where digital meets physical. If it failed, the whole service failed.</p>
+          </div>
+          <div class="case-box">
+            <h3><span>3</span>Urgency to prove traction.</h3>
+            <p>We had to go from discovery to something shippable fast enough to unlock investment.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="case-section reveal">
+        <p class="case-s-label">Act 1</p>
+        <h2 class="case-s-title">The journey</h2>
+        <p>Discovery started on whiteboards: team workshops, actor and value mapping, and interviews with drivers, generators and recyclers.</p>
+        <div class="case-screens musa-strip">
+          <div class="case-screen-item" style="--ar:1.263;">
+            <img src="../assets/images/musa/musa-discovery-1.webp" alt="Whiteboard planning grid with sticky notes on service stages: lead and diagnosis, online waste manifest, collection schedule and alerts, training videos, payments and reports" loading="lazy" width="1744" height="1381">
+          </div>
+          <div class="case-screen-item" style="--ar:0.750;">
+            <img src="../assets/images/musa/musa-discovery-2.webp" alt="Flip chart mapping product ideas with sticky-note votes: smart forecast, online sign-up and proposal, collection schedule and confirmation, waste quality information, impact report" loading="lazy" width="1004" height="1338">
+          </div>
+          <div class="case-screen-item" style="--ar:0.750;">
+            <img src="../assets/images/musa/musa-discovery-3.webp" alt="Pencil notes from a driver interview: routes per month, bag counts, and a first sketch of a collection screen with plus and minus buttons" loading="lazy" width="1009" height="1345">
+          </div>
+          <div class="case-screen-item" style="--ar:1.332;">
+            <img src="../assets/images/musa/musa-discovery-4.webp" alt="Hand-drawn system sketch: route definition, transport, proof of delivery and GPS, with notes on the driver experience" loading="lazy" width="1435" height="1077">
+          </div>
+        </div>
+        <p>From that, I designed the service journey: how technology connects Generator → Transporter → Recycler, stage by stage. It became the shared language of the company. We used it to align the team, to explain the service to partners and clients, and in conversations with investors.</p>
+        <div class="case-img-block">
+          <img src="../assets/images/musa/musa-journey.webp" alt="Musa product journey: Generator, Transporter and Recycler lanes connected stage by stage, from diagnosis and proposal through collection, weighing, quality control, reporting and payment" loading="lazy" width="1920" height="1080">
+        </div>
+        <div class="case-img-block">
+          <img src="../assets/images/musa/musa-journey-detail.webp" alt="The service journey grouped into four phases: diagnostic and proposal, collection and destination, quality control and weighing, report and billing. The collection phase is highlighted" loading="lazy" width="1195" height="932">
+        </div>
+      </div>
+
+      <div class="case-section reveal">
+        <p class="case-s-label">Act 1 · Build</p>
+        <h2 class="case-s-title">Building for the field</h2>
+        <p>With the journey defined, I designed the core flows for the Transporter App and tested them with drivers before development.</p>
+        <p>The prototypes were brand-neutral on purpose. The rebrand was underway, and the test was about the flow, not the look.</p>
+        <div class="case-img-block">
+          <img src="../assets/images/musa/musa-wireframes-1.webp" alt="Early wireframes of the Transporter App: route list to confirm, driver and vehicle assignment with a calendar, a monthly route summary, and a stop-by-stop route with bag counts" loading="lazy" width="2000" height="1147">
+        </div>
+        <div class="musa-row">
+          <div class="case-img-block">
+            <img src="../assets/images/musa/musa-test-1.webp" alt="Usability test: a participant runs the prototype on a phone at a table, filmed by a camera on a tripod" loading="lazy" width="720" height="1280">
+          </div>
+          <div class="case-img-block">
+            <img src="../assets/images/musa/musa-test-2.webp" alt="Usability test: a participant taps through the prototype on a phone while a researcher films the session" loading="lazy" width="720" height="1280">
+          </div>
+          <div class="case-img-block">
+            <img src="../assets/images/musa/musa-test-3.webp" alt="Usability test: a researcher films a participant at a desk as he goes through the prototype" loading="lazy" width="960" height="1280">
+          </div>
+        </div>
+        <p class="musa-cap">Usability tests with the prototype, before development. Every session recorded.</p>
+
+        <div class="musa-videos">
+          <figure>
+            <p class="case-s-label">Prototype v1</p>
+            <div class="case-img-block">
+              <video src="../assets/images/musa/musa-prototype-v1.mp4" poster="../assets/images/musa/musa-prototype-v1.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Prototype v1 screen recording: today's route with one bag count per stop, then turn-by-turn directions"></video>
+            </div>
+            <p class="musa-cap">One bag count per stop, turn-by-turn directions.</p>
+          </figure>
+          <figure>
+            <p class="case-s-label">After the field test</p>
+            <div class="case-img-block">
+              <video src="../assets/images/musa/musa-prototype-v2.mp4" poster="../assets/images/musa/musa-prototype-v2.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Revised prototype screen recording: bag counts per waste type at each stop, a photo of the pickup spot, weight at the destination and a chat with the route team"></video>
+            </div>
+            <p class="musa-cap">A counter per waste type, a photo of the pickup spot, weight at the destination, and a direct chat with the route team.</p>
+          </figure>
+        </div>
+
+        <p style="margin-top:40px;">What I designed for:</p>
+        <div class="case-learnings">
+          <ul>
+            <li><span><strong>Linear, step-by-step collection.</strong> One stop, one task, under time pressure.</span></li>
+            <li><span><strong>Minimal typing.</strong> Pre-filled data, photos instead of text, and a direct channel to the route team for edge cases.</span></li>
+          </ul>
+        </div>
+        <p>The final UI was built by an external studio on top of these flows.</p>
+
+        <p style="margin-top:40px;"><strong>What the field taught us after launch.</strong> With the app live, we saw that many drivers' phones couldn't run it reliably. The company moved to company-provided tablets. It wasn't my call, but the reasons were UX ones: reliable hardware, and a bigger screen for waste categorization and route viewing.</p>
+        <p>Then a tablet was stolen. Hardware decisions are UX decisions in field operations.</p>
+        <div class="musa-row">
+          <div class="case-img-block">
+            <img src="../assets/images/musa/musa-road-1.webp" alt="A driver in his truck cab holding up the app on his own phone" loading="lazy" width="720" height="1280">
+          </div>
+          <div class="case-img-block">
+            <img src="../assets/images/musa/musa-road-2.webp" alt="The app on a phone mounted on the windshield, on the highway" loading="lazy" width="720" height="1280">
+          </div>
+          <div class="case-img-block">
+            <img src="../assets/images/musa/musa-field.webp" alt="Selfie on a collection route: Yuki in a Musa cap and face mask with two collection workers in green uniforms, next to the truck" loading="lazy" width="1200" height="900">
+          </div>
+          <div class="case-img-block">
+            <img src="../assets/images/musa/musa-warehouse.webp" alt="Yuki crouching to apply a label to a waste bin at the warehouse, among stacked bins and bags" loading="lazy" width="1280" height="720">
+          </div>
+        </div>
+        <p class="musa-cap">The app on the road, still on drivers' own phones. Me in the field with the collection team, and applying bin labels at the warehouse.</p>
+      </div>
+
+      <div class="case-section reveal">
+        <p class="case-s-label">Act 2</p>
+        <h2 class="case-s-title">From pitch to operating map</h2>
+        <p>A year later, with a 40-person team, I evolved the journey into a service blueprint crossing every stage of the service with our product domains: weight, traceability, segregation, processing and sale of raw material. We presented it at our internal Demo Day to decide, together, where to focus the product effort next.</p>
+        <div class="case-img-block musa-blueprint">
+          <a href="../assets/images/musa/musa-blueprint-full.webp" target="_blank" rel="noopener">
+            <img src="../assets/images/musa/musa-blueprint.webp" alt="Service blueprint: service stages from sales, onboarding and collection to destination, sale, supply and finance, crossed with five product domains: weight, traceability, segregation, processing and sale of raw material" loading="lazy" width="2000" height="320">
+          </a>
+        </div>
+        <p class="musa-cap"><span class="musa-cap-desktop">Click to open full size.</span><span class="musa-cap-mobile">Swipe to explore. Tap to open full size.</span></p>
+        <div class="case-img-block musa-demo" style="margin-top:36px;">
+          <img src="../assets/images/musa/musa-demoday-photo.webp" alt="Demo Day: the product manager presents the printed service blueprint, taped across a long wall, to the team" loading="lazy" width="2000" height="1500">
+        </div>
+        <p class="musa-cap">Demo Day: our PM walking the team through the blueprint I designed.</p>
+      </div>
+
+      <div class="case-section reveal">
+        <p class="case-s-label">Beyond</p>
+        <h2 class="case-s-title">Beyond the driver app</h2>
+        <div class="case-img-block">
+          <img src="../assets/images/musa/musa-icons.webp" alt="Icon set in the new brand's green: waste types, bags, collection, alerts, payments, environmental impact and feedback, next to the web platform's login screen" loading="lazy" width="2000" height="1125">
+        </div>
+        <p class="musa-cap">Operational icon set for waste categories and field actions.</p>
+        <div class="case-img-block" style="margin-top:36px;">
+          <img src="../assets/images/musa/musa-ops-reports.webp" alt="Before and after of client communication: an older operational report and collection-day message, then the redesigned WhatsApp collection schedule and monthly operational report with recycling rates and impact" loading="lazy" width="2000" height="1125">
+        </div>
+        <p class="musa-cap">Ops reports and WhatsApp templates, automated to scale with the client base.</p>
+        <div class="musa-alelo">
+          <img src="../assets/images/musa/musa-alelo-lp.webp" alt="Laptop showing the landing page for the Musa and Alelo partnership: the headline 'Leave your waste management to us', a branded waste container, and how the service works" loading="lazy" width="1164" height="677">
+        </div>
+        <p class="musa-cap musa-alelo-cap">Partnership landing page for Alelo. It later became their reference for other partnerships.</p>
+      </div>
+
+      <div class="case-section reveal">
+        <p class="case-s-label">Key Learnings</p>
+        <h2 class="case-s-title">What I learned</h2>
+        <div class="case-learnings">
+          <ul>
+            <li><span><strong>Design beyond the screen.</strong> The hardest problems weren't interface problems. The device, the route and how waste got separated mattered as much as the app.</span></li>
+            <li><span><strong>Usable is the bar.</strong> Drivers adopted the app because it removed paperwork, not because they loved it. In operational tools, that's enough.</span></li>
+            <li><span><strong>Service clarity unlocks everything.</strong> The app was rough. The map is what got us partners, investment and, a year later, a 40-person team pointing at the same wall.</span></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Case footer nav -->
+  <div class="container">
+    <div class="case-footer-nav">
+      <a href="../index.html#work" class="case-nav-link">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" style="transform:rotate(180deg)">
+          <path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        All work
+      </a>
+      <a href="b2b-catalogue.html" class="case-nav-link">
+        Next: B2B Product Catalogue
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-links">
+          <a href="../index.html#work"    class="footer-link">work</a>
+          <a href="../index.html#about"   class="footer-link">about</a>
+          <a href="../index.html#contact" class="footer-link">contact</a>
+        </div>
+        <p class="footer-copy">© 2026 Yuki Regina</p>
+        <p class="footer-copy" style="margin-top:6px;font-size:11px;opacity:.45;">Designed by Yuki Regina. Coded with Claude. Yes, I pushed to GitHub. As a designer.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.querySelectorAll('.musa-videos video').forEach(v => {
+        v.removeAttribute('autoplay');
+        v.pause();
+        v.controls = true;
+      });
+    }
+  </script>
+</body>
+</html>
