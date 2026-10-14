@@ -1220,12 +1220,16 @@ footer {
   display: flex; align-items: center; justify-content: center;
   color: var(--text-muted); font-size: 12px;
 }
-.case-img-cap {
-  padding: 12px 20px;
-  font-size: 11px; color: var(--text-muted);
-  border-top: 1px solid var(--border);
-  background: var(--white);
+.case-img-cap,
+.case-body p.case-img-cap {
+  padding: 0;
+  font-size: 12px; line-height: 1.5; color: var(--text-muted);
+  font-style: italic;
+  letter-spacing: 0.01em;
 }
+/* Pull caption up under its image (blocks carry 32–36px bottom margin) */
+.case-img-block + .case-img-cap { margin-top: -22px; }
+.case-video-wrap + .case-img-cap { margin-top: -18px; }
 .case-results-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1348,8 +1352,7 @@ footer {
   padding: 14px var(--pad-x);
   font-size: 12px;
   color: var(--text-muted);
-  border-bottom: 1px solid var(--border);
-  background: var(--white);
+  font-style: italic;
   letter-spacing: 0.01em;
 }
 
